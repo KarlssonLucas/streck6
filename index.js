@@ -19,6 +19,8 @@ app.get('/*', (request, response) => {
     response.redirect('/');
 })
 
+app.use(express.static('strecklista/build'));
+
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
 })
