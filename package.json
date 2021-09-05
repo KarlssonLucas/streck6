@@ -1,0 +1,39 @@
+{
+  "name": "strecklista",
+  "version": "1.0.0",
+  "description": "Create-react-app with Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "heroku-postbuild": "cd strecklista && npm install --legacy-peer-deps && npm run build"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "node-fetch": "^2.6.1",
+    "pg": "^8.5.1",
+    "popper.js": "^1.16.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-pose": "^4.0.10",
+    "react-rewards": "^1.1.2",
+    "react-select": "^4.3.0",
+    "rollup": "^2.47.0"
+  },
+  "engines": {
+    "node": "^15.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarlssonLucas/dat257-laskuppen.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/KarlssonLucas/dat257-laskuppen/issues"
+  },
+  "homepage": "https://github.com/KarlssonLucas/dat257-laskuppen#readme"
+}

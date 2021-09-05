@@ -1,0 +1,12 @@
+.avatar-page-content {
+    background: #09CDDA;
+    width: 30em;
+    height: 5em;
+    margin: auto;
+}
+
+.avatar-text {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5em;
+}
