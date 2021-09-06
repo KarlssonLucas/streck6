@@ -15,7 +15,9 @@ app.get('/api/items', db.items)
 app.get('/api/skuld/:id', db.skuldById)
 app.get('/api/totstreck/:id', db.totstreck)
 
-app.use(express.static('strecklista/build'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("./strecklista/build"));
+}
 
 app.get('/*', (request, response) => {
     response.redirect('/');
