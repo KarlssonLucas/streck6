@@ -6,10 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "heroku-postbuild": "npm install --legacy-peer-deps && cd strecklista && npm install --legacy-peer-deps && npm run build",
-    "client": "npm start --prefix client",
-    "predeploy": "cd strecklista && npm run build",
-    "deploy": "cd strecklista && gh-pages -d build"
+    "heroku-postbuild": "npm install --legacy-peer-deps && cd strecklista && npm install --legacy-peer-deps && npm run build"
   },
   "license": "ISC",
   "dependencies": {
@@ -32,11 +29,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KarlssonLucas/dat257-laskuppen.git"
+    "url": "git+https://github.com/KarlssonLucas/strecklista.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/KarlssonLucas/dat257-laskuppen/issues"
+    "url": "https://github.com/KarlssonLucas/strecklista/issues"
   },
   "homepage": "http://karlssonlucas.github.io/strecklista"
 }
