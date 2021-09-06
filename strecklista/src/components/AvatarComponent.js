@@ -8,11 +8,10 @@ const AvatarComponent = (props) => {
 
     function handleRedirect () {
         history.push("/user/" + props.id);
-        history.go();
     }
 
     return (
-        <div className="avatar-page-content" onClick= {() => handleRedirect() }>
+        <div className="avatar-page-content" onClick= {() => window.location.href="/user/"+props.id }>
                 <p className="avatar-text"> {props.name} </p>
         </div>
     )
