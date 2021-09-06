@@ -19,10 +19,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("./strecklista/build"));
 }
 
-app.get('/*', (request, response) => {
-    response.redirect('/');
-})
-
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./strecklista/build/index.html"));
 });
