@@ -25,7 +25,7 @@ app.get('/*', (request, response) => {
 
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./strecklista/build/index.html"));
-});**
+});
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
