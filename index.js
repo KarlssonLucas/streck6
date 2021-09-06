@@ -15,11 +15,11 @@ app.get('/api/items', db.items)
 app.get('/api/skuld/:id', db.skuldById)
 app.get('/api/totstreck/:id', db.totstreck)
 
+app.use(express.static('strecklista/build'));
+
 app.get('/*', (request, response) => {
     response.redirect('/');
 })
-
-app.use(express.static('strecklista/build'));
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

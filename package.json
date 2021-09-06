@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "heroku-postbuild": "cd strecklista && npm install --legacy-peer-deps && npm run build"
+    "heroku-postbuild": "cd strecklista && npm install --legacy-peer-deps && npm run build",
+    "client": "npm start --prefix client"
   },
   "license": "ISC",
   "dependencies": {
