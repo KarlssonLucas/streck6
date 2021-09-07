@@ -31,6 +31,8 @@
 }
 
 .div4 {
+    padding: 10px;
+    background-color: lightblue;
     margin-top: 10em;
     margin-left: 20px;
     white-space: nowrap;
@@ -38,11 +40,17 @@
 }
 
 .div5 { 
+    padding: 10px;
+    background-color: lightblue;
     margin-top: 10em;
+    margin-left: 8px;
     grid-area: 3 / 2 / 4 / 3; 
 }
 
-.div6 { 
+.div6 {
+    margin-left: 8px;
+    padding: 10px;
+    background-color: lightblue;
     margin-top: 10em;
     grid-area: 3 / 3 / 4 / 4;
 }
