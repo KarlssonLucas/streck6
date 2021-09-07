@@ -1,6 +1,7 @@
 import "../css/user-detail.css";
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import StreckComponent from "./StreckComponent";
 
 const UserDetailComponent = (props) => {
 
@@ -58,7 +59,7 @@ const UserDetailComponent = (props) => {
                 </div>
 
             <div className="div7">
-                {view === 'streck' && "h"}  
+                {view === 'streck' && <StreckComponent />}  
                 {view === 'skuld' && "he"}
                 {view === 'historik' && "hej"}
             </div>

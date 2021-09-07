@@ -49,6 +49,7 @@ const streckat = (request, response) => {
 };
 
 const streckatById = (request, response) => {
+    if request.params.id
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM Streckat WHERE uid = $1", [id], (error, results) => {
         if (error) {
