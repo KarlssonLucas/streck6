@@ -1,7 +1,7 @@
 .item { 
     display:block;    
     background-color: grey;
-    padding: 15px;
+    padding: 15px 15px 10px 15px;
     margin: 10px;
 }
 
@@ -11,4 +11,40 @@
 
 .pris {
 
+}
+
+.streckaItem {
+    display: flex;
+    position: absolute;
+    float: right;
+    margin-left: 7em;
+}
+
+.inputfield {
+    width: 20px;
+    height: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.checkout {
+    background-color: orange;
+    margin-left: 6.8em;
+    padding-left:2.5em;
+    width:4em;
+    height: 30px;
+}
+
+.addition {
+    background-color: limegreen;
+    width: 30px;
+    height: 30px;
+    margin:auto;
+}
+
+.subtract {
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    margin: auto;
 }

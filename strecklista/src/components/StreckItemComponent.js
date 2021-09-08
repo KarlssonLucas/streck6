@@ -7,9 +7,14 @@ const StreckItemComponent = (props) => {
     
     return (
         <div className="item">
+                <div className="streckaItem"> 
+                        <div className="subtract"> - </div>
+                        <input type="text" className="inputfield" defaultValue="1"/>
+                        <div className="addition"> + </div>
+                </div>
                 <div className="name"> {props.name} </div>
-                <div className="pris"> {props.pris} </div>
-                <div className=""> </div>
+                <div className="pris"> {props.pris} kr </div>
+                <div className="checkout"> Buy </div>
         </div>
     )
 }
