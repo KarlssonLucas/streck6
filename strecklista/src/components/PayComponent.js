@@ -24,7 +24,7 @@ const PayComponent = (props) => {
             hearders: {'Content-Type': 'application/json' },
         };
 
-        await fetch("/api/pay/"+props.id, requestOptions).then((response : any) => response.json()).then((response) => {
+        await fetch("/api/pay/"+props.id +"/" + parseInt(document.getElementById("inputPay").value), requestOptions).then((response : any) => response.json()).then((response) => {
             console.log("done")
             window.location.reload(false);
         });
@@ -36,8 +36,8 @@ const PayComponent = (props) => {
    
     return (
         <div className="">
-            <input key={skuld ? 'notLoadedYet' : 'loaded'} type="number" className="if" defaultValue={skuld<0 ? skuld*-1 : skuld} />
-            <div className="addpay">Lägg till betalning</div>
+            <input id="inputPay" key={skuld ? 'notLoadedYet' : 'loaded'} type="number" className="if" defaultValue={skuld<0 ? skuld*-1 : 0} />
+            <div className="addpay" onClick= {() => payDebt()}>Lägg till betalning</div>
         </div>
     )
 }

@@ -117,6 +117,66 @@ const strecka = (request, response) => {
     });
 };
 
+const pay = async (request, response) => {
+    const id = parseInt(request.params.id);
+    const paid = parseInt(request.params.paid);
+    const paidText = request.params.paid+"kr";
+    
+    await client.query("INSERT INTO Betalt (id, sid, paid) VALUES (DEFAULT,$1,$2)", [id, paid], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            console.log(results)
+        }
+    });
+
+    await client.query("INSERT INTO History (id, time, sid, streck, item) VALUES (DEFAULT, CURRENT_DATE, $1, $2, 99)", [id, paid], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            console.log(results)
+            response.status(200).json(results.rows);
+        }
+    });
+
+};
+
+const remove = async (request, response) => {
+    const userid = parseInt(request.params.id);
+    const hid = parseInt(request.params.hid);
+    const itemId = parseInt(request.params.itemid);
+    const amount = parseInt(request.params.amount);
+
+    const res = {};
+
+    await client.query("UPDATE strecklist SET streck=streck-$1 WHERE sid=$2 AND item=$3", [amount,userid,itemId], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            console.log(results)
+        }
+    });
+
+    await client.query("DELETE FROM history WHERE id = $1", [hid], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            console.log(results);
+        }
+    });
+
+    if (itemId === 99) {
+        client.query("INSERT INTO betalt (id, sid, paid) VALUES (DEFAULT, $1, -1 * $2)", [userid, amount], (error, results) => {
+            if (error) {
+                response.status(500).send(errorMsg("Internal server error"));
+            } else {
+                console.log(results)
+            }
+        });
+    }
+    response.status(200).json({});
+};
+
 module.exports = {
     users,
     usersById,
@@ -126,5 +186,7 @@ module.exports = {
     items,
     totstreck,
     history,
-    strecka
+    strecka,
+    pay,
+    remove
 }

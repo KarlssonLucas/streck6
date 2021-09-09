@@ -33,7 +33,7 @@ CREATE TABLE Strecklist (
 
 CREATE TABLE History (
     id SERIAL PRIMARY KEY,
-    time DATE  NOT NULL DEFAULT CURRENT_DATE,
+    time DATE  NOT NULL,
     sid INT REFERENCES Users(id) NOT NULL,
     streck INT NOT NULL,
     item INT NOT NULL

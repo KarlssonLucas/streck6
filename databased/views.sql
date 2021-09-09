@@ -7,7 +7,7 @@ SELECT Users.id AS uid, streck, item
 FROM Strecklist LEFT JOIN Users ON Users.id = sid;
 
 CREATE OR REPLACE VIEW HistoryView AS
-SELECT History.id, time, sid, streck, name FROM History LEFT JOIN Items ON History.item = Items.id;
+SELECT History.id, time, sid, streck, name, Items.id as itemid FROM History LEFT JOIN Items ON History.item = Items.id;
 
 CREATE OR REPLACE VIEW betaltView AS 
 SELECT * From betalt;
