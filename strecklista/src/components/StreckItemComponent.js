@@ -5,6 +5,18 @@ import { useHistory } from 'react-router-dom';
 const StreckItemComponent = (props) => {
     const [items, setItems] = useState([]);
     const [amount, setAmount] = useState(1);
+
+    const streckInsert = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        };
+
+        await fetch("/api/strecka/"+props.user +"/"+props.id+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
+            console.log("done");
+            window.location.reload(false);
+        });
+    }
    
     return (
         <div className="item">
@@ -15,7 +27,7 @@ const StreckItemComponent = (props) => {
                 </div>
                 <div className="name"> {props.name} </div>
                 <div className="pris"> {props.pris} kr </div>
-                <div className="checkout"> Buy </div>
+                <div className="checkout" onClick = {() => streckInsert()} > Buy </div>
         </div>
     )
 }

@@ -2,6 +2,8 @@ import "../css/user-detail.css";
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import StreckComponent from "./StreckComponent";
+import HistoryComponent from "./HistoryComponent";
+import PayComponent from "./PayComponent";
 
 const UserDetailComponent = (props) => {
 
@@ -54,9 +56,9 @@ const UserDetailComponent = (props) => {
                 <div className="div6" onClick={ () => setView('streck')}> strecka </div>
 
             <div className="div7">
-                {view === 'streck' && <StreckComponent />}  
-                {view === 'skuld' && "he"}
-                {view === 'historik' && "hej"}
+                {view === 'streck' && <StreckComponent id={userId}/>}  
+                {view === 'skuld' && <PayComponent id={userId}/>}
+                {view === 'historik' && <HistoryComponent id={userId}/>}
             </div>
 
         </div>

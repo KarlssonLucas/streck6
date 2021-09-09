@@ -24,7 +24,7 @@ useEffect(() => {
     return (
         <div className="">
             {items.map(i => (
-                <StreckItem id={i.id} name={i.name} pris={i.pris} key={i.id}/>
+                <StreckItem user={props.id} id={i.id} name={i.name} pris={i.pris} key={i.id}/>
             ))}
             {console.log(items[0])}
         </div>

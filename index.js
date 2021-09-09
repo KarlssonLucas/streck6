@@ -7,6 +7,8 @@ const port = process.env.PORT || 5000
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
+app.get('/api/strecka/:userId/:itemId/:amount', db.strecka)
+app.get('/api/history/:id', db.history)
 app.get('/api/users', db.users)
 app.get('/api/users/:id', db.usersById)
 app.get('/api/streck', db.streckat)

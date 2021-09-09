@@ -91,6 +91,32 @@ const totstreck = (request, response) => {
     });
 };
 
+const history = (request, response) => {
+    const id = parseInt(request.params.id);
+    client.query("SELECT * FROM HistoryView WHERE sid = $1", [id], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            response.status(200).json(results.rows);
+        }
+    });
+};
+
+
+const strecka = (request, response) => {
+    const id = parseInt(request.params.userId);
+    const item = parseInt(request.params.itemId);
+    const amount = parseInt(request.params.amount);
+    client.query("INSERT INTO NewStreckat (uid, streck, item) VALUES ($1,$2,$3)", [id, amount, item], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            console.log(results)
+            response.status(200).json(results.rows);
+        }
+    });
+};
+
 module.exports = {
     users,
     usersById,
@@ -98,5 +124,7 @@ module.exports = {
     streckatById,
     skuldById,
     items,
-    totstreck
+    totstreck,
+    history,
+    strecka
 }

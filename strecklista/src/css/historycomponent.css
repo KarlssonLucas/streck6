@@ -1,0 +1,12 @@
+.history { 
+    display:block;    
+    background-color: grey;
+    padding: 15px 15px 10px 15px;
+    margin: 10px;
+    height: 35px;
+}
+
+.historyitem {
+    position: absolute;
+}
+
