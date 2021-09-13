@@ -15,7 +15,7 @@ export default class Strecklista extends React.Component {
         return (
 
     <BrowserRouter>
-        <div>
+        <div className="aaa">
             <Route exact path="/" render={(props) => <AvatarPage {...props}/>}/>
             <Route exact path="/user/:id" render={(props) => <UserDetailPage {...props} />} />
         </div>
