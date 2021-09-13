@@ -1,6 +1,6 @@
 .user {
     width: 18em;
-    height: 45em;
+    height: 42em;
     margin: auto;
     background-color: #09CDDA;
     display: grid;
@@ -55,14 +55,26 @@
     grid-area: 3 / 3 / 4 / 4;
 }
 
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    margin-bottom: 5px;
+}
+
 .div7 {
     overflow-y: scroll;
+    right: -17px;
     margin-left: 1em;
-    margin-top: 5px;
     width: 16em;
-    height: 30em;
+    height: 28em;
     background-color: lightgrey;
     grid-area: 4 / 1 / 5 / 4;
+    margin-bottom: 15px;
 }
 
 .button {

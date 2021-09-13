@@ -50,11 +50,11 @@ const UserDetailComponent = (props) => {
             <div className="div3">
                 Totstreckat: {sumStreck.map((s) => {return s.sum})}
             </div>
-
+            <div className="buttons">
                 <div className="div4" onClick={ () => setView('skuld')}> betala skuld </div>
                 <div className="div5" onClick={ () => setView('historik')}> historik </div>
                 <div className="div6" onClick={ () => setView('streck')}> strecka </div>
-
+            </div>
             <div className="div7">
                 {view === 'streck' && <StreckComponent id={userId}/>}  
                 {view === 'skuld' && <PayComponent id={userId}/>}
