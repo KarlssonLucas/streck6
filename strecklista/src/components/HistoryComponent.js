@@ -38,7 +38,8 @@ const HistoryComponent = (props) => {
         {hist.slice(0).reverse().map(i => (
             <div key={i.id} className="history">
                 <div key={i.id} className="historyitem">
-                    <div className="">{i.name} {i.streck}{i.name === "Inbetalning" ? "kr" : "st"} </div>
+                    <div className="">{i.name} </div>
+                    <div className=""> {i.streck}{i.name === "Inbetalning" ? "kr" : "st"}  </div>
                     <div className="">{i.time.substring(0,10)}</div>
                 </div>
                 <div className="removeButton" onClick={() => removeFromHistory(i.id, i.streck, i.itemid)}> Delete </div>

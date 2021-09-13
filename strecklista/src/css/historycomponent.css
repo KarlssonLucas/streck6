@@ -3,7 +3,7 @@
     background-color: grey;
     padding: 15px 15px 10px 15px;
     margin: 10px;
-    height: 35px;
+    height: 60px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
