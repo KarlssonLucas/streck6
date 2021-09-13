@@ -1,7 +1,7 @@
 import React from 'react';
 import UserDetailPage from './pages/UserDetailPage';
 import AvatarPage from './pages/AvatarPage';
-import { BrowserRouter , Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter , Redirect, Route, Switch} from 'react-router-dom';
 import "./css/mainpage.css";
 
 export default class Strecklista extends React.Component {

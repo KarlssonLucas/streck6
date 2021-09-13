@@ -32,12 +32,13 @@ const PayComponent = (props) => {
 
     useEffect(() => {
         fetchSkuld();
+        console.log("5a9".match(/^[0-9]+$/) != null)
     }, []);
    
     return (
         <div className="">
             <input id="inputPay" key={skuld ? 'notLoadedYet' : 'loaded'} type="number" className="if" defaultValue={skuld<0 ? skuld*-1 : 0} />
-            <div className="addpay" onClick= {() => payDebt()}>Lägg till betalning</div>
+            <div className="addpay" onClick= {() => document.getElementById("inputPay").value.match(/^[0-9]+$/) != null ? payDebt() : alert('hur full är du egentligen')}>Lägg till betalning</div>
         </div>
     )
 }
