@@ -39,7 +39,9 @@
     background-color: limegreen;
     width: 30px;
     height: 30px;
-    margin:auto;
+    text-align: center;
+    vertical-align: center;
+    line-height: 30px;
 }
 
 .subtract {
@@ -47,4 +49,7 @@
     width: 30px;
     height: 30px;
     margin: auto;
+    text-align: center;
+    vertical-align: center;
+    line-height: 30px;
 }
