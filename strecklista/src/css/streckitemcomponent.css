@@ -1,6 +1,8 @@
 .item { 
     display:block;    
-    background-color: grey;
+    background-color: lightgrey;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
     padding: 15px 15px 10px 15px;
     margin: 10px;
 }
@@ -28,11 +30,13 @@
 }
 
 .checkout {
-    background-color: orange;
-    margin-left: 6.8em;
-    padding-left:2.5em;
-    width:4em;
+    background-color: #fff1e6;
+    margin-left: 6.9em;
+    width:6.2em;
     height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
 }
 
 .addition {

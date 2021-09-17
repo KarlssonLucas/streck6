@@ -27,7 +27,7 @@ const StreckItemComponent = (props) => {
                 </div>
                 <div className="name"> {props.name} </div>
                 <div className="pris"> {props.pris} kr </div>
-                <div className="checkout" onClick = {() => streckInsert()} > Buy </div>
+                <div className="checkout" onClick = {() => streckInsert()} > Strecka </div>
         </div>
     )
 }
