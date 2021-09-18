@@ -91,6 +91,16 @@ const totstreck = (request, response) => {
     });
 };
 
+const tots = (request, response) => {
+    client.query("SELECT * FROM totstreck ORDER BY sum DESC", [], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+            response.status(200).json(results.rows);
+        }
+    });
+};
+
 const history = (request, response) => {
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM HistoryView WHERE sid = $1", [id], (error, results) => {
@@ -188,5 +198,6 @@ module.exports = {
     history,
     strecka,
     pay,
-    remove
+    remove,
+    tots
 }

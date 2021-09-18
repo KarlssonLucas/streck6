@@ -3,6 +3,7 @@
     background-color: grey;
     padding: 15px 15px 10px 15px;
     margin: 10px;
+    position: relative;
 }
 
 .name {
@@ -15,8 +16,8 @@
 
 .streckaItem {
     display: flex;
-    position: absolute;
     float: right;
+    position: absolute;
     margin-left: 7em;
 }
 

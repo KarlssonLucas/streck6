@@ -26,11 +26,12 @@ export default class AvatarPage extends React.Component {
         
         return (
             <BrowserRouter>
-                <div className="main-general-styling">
-                    <div className="main-avatar-card">
+                <div className="">
+                    <div className="">
                         {this.state.data.map(el => (
                             <UserList name={el.login} id={el.id}/>
                         ))}
+                        <div className="topstreck"> Drägglista</div>
                     </div>
                 </div>
             </BrowserRouter>)

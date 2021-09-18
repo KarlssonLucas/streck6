@@ -18,6 +18,7 @@ app.get('/api/streck/:id', db.streckatById)
 app.get('/api/items', db.items)
 app.get('/api/skuld/:id', db.skuldById)
 app.get('/api/totstreck/:id', db.totstreck)
+app.get('/api/tot', db.tots)
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("./strecklista/build"));

@@ -7,3 +7,13 @@
 .aaa {
     height: 49em;
 }
+
+.topstreck {
+    width: 18em;
+    background-color: #09cdda;
+    margin: auto;
+    margin-top: 1em;
+    height: 5em;
+    vertical-align: middle;
+    text-align: center;
+}
