@@ -31,7 +31,7 @@ export default class AvatarPage extends React.Component {
                         {this.state.data.map(el => (
                             <UserList name={el.login} id={el.id}/>
                         ))}
-                        <div className="topstreck"> Drägglista</div>
+                        <div className="topstreck" onClick = {() => window.location.href="/dragg"}> Drägglista</div>
                     </div>
                 </div>
             </BrowserRouter>)

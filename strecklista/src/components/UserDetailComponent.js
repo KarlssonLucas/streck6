@@ -59,6 +59,10 @@ const UserDetailComponent = (props) => {
 
     const skuldPay = skuld.map((s) => s.pay);
 
+    const viewset = (string) => {
+       setView(string); 
+    }
+
     return (
         <div className="user">
             <div className="div1">
@@ -68,7 +72,7 @@ const UserDetailComponent = (props) => {
                 Balance: <div className={skuldPay<0 ? "negative" : "positive"}> {skuldPay} </div> 
             </div>
             <div className="div3">
-                Totstreckat: {sumStreck.map((s) => {return s.sum})}
+                Totstreckat: {sumStreck.map((s) => {return (s.sum == parseInt(s.sum)) ? parseInt(s.sum) : s.sum })}
             </div>
             <div className="buttons">
                 <div className={skuldClasses} onClick={ () => setView('skuld')}> betala skuld </div>
@@ -78,7 +82,7 @@ const UserDetailComponent = (props) => {
             <div className="div7">
                 {view === 'streck' && <StreckComponent id={userId}/>}  
                 {view === 'skuld' && <PayComponent id={userId}/>}
-                {view === 'historik' && <HistoryComponent id={userId}/>}
+                {view === 'historik' && <HistoryComponent id={userId} />}
             </div>
 
         </div>

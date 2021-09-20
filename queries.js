@@ -82,7 +82,7 @@ const items = (request, response) => {
 
 const totstreck = (request, response) => {
     const id = parseInt(request.params.id);
-    client.query("SELECT * FROM totstreck WHERE uid = $1", [id], (error, results) => {
+    client.query("SELECT * FROM totstreck WHERE id = $1", [id], (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
@@ -92,7 +92,7 @@ const totstreck = (request, response) => {
 };
 
 const tots = (request, response) => {
-    client.query("SELECT * FROM totstreck ORDER BY sum DESC", [], (error, results) => {
+    client.query("select * from totstreck ORDER BY sum DESC", [], (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
