@@ -1,20 +1,49 @@
 const { request, response } = require("express");
 const fetch = require("node-fetch");
+const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
 
-if (!process.env.DATABASE_URL) {
-  require("dotenv").config();
-}
-
-const { Client } = require("pg");
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-      rejectUnauthorized: false,
-  },
-});
-
-client.connect();
+const logout = (request, response) => {
+    request.session.destroy();
+    response.status(200).send(true);
+  }
+  
+//Login user by mail and password matching
+const login = (request, response) => {
+  
+    const id = request.body.login;
+    const password = request.body.password;
+  
+    client.query(
+      "SELECT * FROM users where login=$1 AND password=$2",
+      [id, password],
+      (error, result) => {
+        if (error) {
+          response.status(500).send(errorMsg("Internal server error"));
+        }
+        else if (result.rows.length === 1) { // SUCCESS LOGIN 
+          request.session.isLoggedIn = true;
+          request.session.userId = result.rows[0].id;
+          request.session.name = result.rows[0].login;
+          console.log("SESSION SET")
+          response.status(200).send(true);
+        }
+        else {
+          console.log("SESSION DESTROY")
+          request.session.destroy();
+          response.status(400).send(errorMsg("Wrong credentials"));
+        }
+      }
+    );
+  }
+  
+  const getSession = (request, response) => {
+    const session = {
+      login: request.session.isLoggedIn === true,
+      id: request.session.userId,
+      name: request.session.name
+    }
+    response.status(200).send(session);
+  }
 
 const users = (request, response) => {
     client.query("SELECT * FROM Users", (error, results) => {
@@ -199,5 +228,8 @@ module.exports = {
     strecka,
     pay,
     remove,
-    tots
+    tots,
+    login,
+    logout,
+    getSession
 }
