@@ -74,17 +74,13 @@ const LoginPage = (props) => {
   }
 
   return (
-    <div className="">
-        <form className="form">
-          <div className="input-group">
-            <label htmlFor="email">Nick</label>
-            <input name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Användarnamn" />
+    <div className="loginpage">
+        <form className="test">
+          <div className="">
+            <input id="username" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Username" />
+            <input id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Password"/>
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Lösenord</label>
-            <input name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="  Lösenord:qwe123"/>
-          </div>
-          <button className="primary" onClick={() => login()}>Logga in</button>
+          <button class="loginbutton" onClick={() => login()}>Logga in</button>
         </form>
     </div>
   

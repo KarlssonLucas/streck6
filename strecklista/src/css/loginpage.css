@@ -1,0 +1,57 @@
+:root {
+    --darkgrey: #1f2833;
+    --grey: #c5c6c7;
+    --lightblue: #66fcf1;
+    --darkblue: #45a29e;
+}
+
+.loginpage {
+    background-color: var(--darkgrey);
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.test {
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+}
+
+button.loginbutton {
+    background-image: linear-gradient(to right, var(--darkblue), var(--lightblue));
+    color: var(--darkgrey);
+    border: 0;
+    outline: 0;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+
+}
+
+label, input {
+    display: block;
+    margin-bottom: 25px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid var(--grey);
+    color: var(--grey);
+}
+
+#username[type=text] {
+    background-image: url(icons8-anonymous-mask-16.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+#password {
+    background-image: url(icons8-key-16.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}

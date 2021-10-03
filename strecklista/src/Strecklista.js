@@ -32,6 +32,7 @@ export default class Strecklista extends React.Component {
                 <div>
                 <Switch>
                 <div className="aaa">
+                    <Redirect to={"/user/"+this.state.userid}/>
                     <Route exact path={"/user/"+this.state.userid} render={(props) => <UserDetailPage {...props} />} />
                     <Route exact path="/dragg" render={(props) => <Dragg {...props} />} />
                 </div>
