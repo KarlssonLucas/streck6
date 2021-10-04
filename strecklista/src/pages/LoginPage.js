@@ -2,6 +2,8 @@ import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import "../css/loginpage.css";
+import Button from '@mui/material/Button';
+import { LoadingButton } from '@mui/lab/LoadingButton';
 
 const useLoginHook = (formValues) => {
   const [values, handleChange] = useState(formValues);
@@ -76,11 +78,15 @@ const LoginPage = (props) => {
   return (
     <div className="loginpage">
         <form className="test">
-          <div className="">
+            <div className="streck6">
+                streck6
+            </div>
             <input id="username" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Username" />
             <input id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Password"/>
-          </div>
-          <button class="loginbutton" onClick={() => login()}>Logga in</button>
+          <button className="loginbutton" onClick={() => login()}>Logga in</button>
+      <LoadingButton loading loadingIndicator="Loading..." variant="outlined">
+  Fetch data
+</LoadingButton>
         </form>
     </div>
   

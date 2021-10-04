@@ -8,8 +8,7 @@ const logout = (request, response) => {
   }
   
 //Login user by mail and password matching
-const login = (request, response) => {
-  
+const login = (request, response) => {  
     const id = request.body.login;
     const password = request.body.password;
   
@@ -46,6 +45,7 @@ const login = (request, response) => {
   }
 
 const users = (request, response) => {
+    if (!hasSession(request, response)) return;
     client.query("SELECT * FROM Users", (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
@@ -56,6 +56,7 @@ const users = (request, response) => {
 };
 
 const usersById = (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM Users WHERE id = $1", [id], (error, results) => {
         if (error) {
@@ -68,6 +69,7 @@ const usersById = (request, response) => {
 
 
 const streckat = (request, response) => {
+    if (!hasSession(request, response)) return;
     client.query("SELECT * FROM Streckat", (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
@@ -78,6 +80,7 @@ const streckat = (request, response) => {
 };
 
 const streckatById = (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM Streckat WHERE uid = $1", [id], (error, results) => {
         if (error) {
@@ -89,6 +92,7 @@ const streckatById = (request, response) => {
 };
 
 const skuldById = (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM totskuld WHERE uid = $1", [id], (error, results) => {
         if (error) {
@@ -100,6 +104,7 @@ const skuldById = (request, response) => {
 };
 
 const items = (request, response) => {
+    if (!hasSession(request, response)) return;
     client.query("SELECT * FROM Items", (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
@@ -110,6 +115,7 @@ const items = (request, response) => {
 };
 
 const totstreck = (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM totstreck WHERE id = $1", [id], (error, results) => {
         if (error) {
@@ -121,6 +127,7 @@ const totstreck = (request, response) => {
 };
 
 const tots = (request, response) => {
+    if (!hasSession(request, response)) return;
     client.query("select * from totstreck ORDER BY sum DESC", [], (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
@@ -131,6 +138,7 @@ const tots = (request, response) => {
 };
 
 const history = (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
     client.query("SELECT * FROM HistoryView WHERE sid = $1", [id], (error, results) => {
         if (error) {
@@ -143,6 +151,7 @@ const history = (request, response) => {
 
 
 const strecka = (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.userId);
     const item = parseInt(request.params.itemId);
     const amount = parseInt(request.params.amount);
@@ -157,6 +166,7 @@ const strecka = (request, response) => {
 };
 
 const pay = async (request, response) => {
+    if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
     const paid = parseInt(request.params.paid);
     const paidText = request.params.paid+"kr";
@@ -181,6 +191,7 @@ const pay = async (request, response) => {
 };
 
 const remove = async (request, response) => {
+    if (!hasSession(request, response)) return;
     const userid = parseInt(request.params.id);
     const hid = parseInt(request.params.hid);
     const itemId = parseInt(request.params.itemid);

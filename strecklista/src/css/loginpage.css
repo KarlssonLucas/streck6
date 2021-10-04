@@ -1,12 +1,12 @@
 :root {
-    --darkgrey: #1f2833;
-    --grey: #c5c6c7;
-    --lightblue: #66fcf1;
-    --darkblue: #45a29e;
+    --dg: #1f2833;
+    --g: #c5c6c7;
+    --lb: #66fcf1;
+    --db: #45a29e;
 }
 
 .loginpage {
-    background-color: var(--darkgrey);
+    background-color: var(--dg);
     display: flex;
     position: absolute;
     right: 0;
@@ -22,8 +22,8 @@
 }
 
 button.loginbutton {
-    background-image: linear-gradient(to right, var(--darkblue), var(--lightblue));
-    color: var(--darkgrey);
+    background-image: linear-gradient(to right, var(--db), var(--lb));
+    color: var(--dg);
     border: 0;
     outline: 0;
     width: 150px;
@@ -38,8 +38,9 @@ label, input {
     border: 0;
     outline: 0;
     background: transparent;
-    border-bottom: 1px solid var(--grey);
-    color: var(--grey);
+    border-bottom: 2px solid var(--g);
+    color: var(--g);
+    -webkit-border-image: -webkit-gradient(linear, left top, left bottom, from(var(--db)), to(var(--lb)), color-stop(0.5, var(--lb)), color-stop(0.5, var(--db))) 21 30 30 21 repeat repeat;
 }
 
 #username[type=text] {
@@ -55,3 +56,16 @@ label, input {
     padding-left: 20px;
     padding-bottom: 10px;
 }
+
+.streck6 {
+    color: white;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 20%;
+    font-size: 25px;
+}
+
