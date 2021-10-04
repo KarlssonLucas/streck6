@@ -7,8 +7,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import FilledInput from '@mui/material/FilledInput';
+import { makeStyles } from '@material-ui/core/styles'
+import {Redirect} from 'react-router-dom';
+
 
 const styles = makeStyles({
   root: {
@@ -52,6 +53,7 @@ const useLoginHook = (formValues) => {
 
 const LoginPage = (props) => {
   
+  const [errorLogin, setErrorLogin] = useState(false);
   const classes = styles();
   const [loggedIn, setLoggedIn] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
@@ -94,12 +96,13 @@ const LoginPage = (props) => {
       if (response === true) {
         setWrongCredentials(false);
         setCorrectCredentials(true);
+        setErrorLogin(false);
     }
       else {
         setWrongCredentials(true);
-        console.log(response.error);
+        setErrorLogin(true);
+        console.log("hejhej");
       }
-
     })
     window.location.reload();
   };
@@ -118,8 +121,8 @@ const LoginPage = (props) => {
             </div>
             <ThemeProvider theme={theme}>
             <Stack spacing={2}>
-              <TextField className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="username" color="primary" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Username" variant="outlined" />
-              <TextField className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Password" variant="outlined" />
+              {errorLogin ? <TextField error className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="username" color="primary" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Username" variant="outlined" /> : <TextField className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="username" color="primary" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Username" variant="outlined" /> }
+              {errorLogin ? <TextField error className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Password" variant="outlined" /> : <TextField className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Password" variant="outlined" />}
               <Button color="primary" variant="outlined" onClick={() => login()}>Logga in</Button>
             </Stack>
             </ThemeProvider>
@@ -129,8 +132,4 @@ const LoginPage = (props) => {
   )
 };
 
-LoginPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(LoginPage);
+export default LoginPage;

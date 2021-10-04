@@ -4,8 +4,20 @@ import { useHistory, useLocation } from 'react-router-dom';
 import StreckComponent from "./StreckComponent";
 import HistoryComponent from "./HistoryComponent";
 import PayComponent from "./PayComponent";
+import { Drawer, Divider, IconButton } 
+    from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText } 
+    from '@material-ui/core';
+import PermContactCalendarIcon from 
+    '@material-ui/icons/PermContactCalendar';
+import ReorderIcon from '@material-ui/icons/Reorder';
+import AccountCircleIcon from 
+    '@material-ui/icons/AccountCircle';
+import { Link } from 'react-router-dom';
 
 const UserDetailComponent = (props) => {
+    const [isDrawer, setIsDrawer] = useState(false);
+
     var classNames = require('classnames');
     const location = useLocation()
     const [skuld, setSkuld] = useState([]);
@@ -59,10 +71,6 @@ const UserDetailComponent = (props) => {
 
     const skuldPay = skuld.map((s) => s.pay);
 
-    const viewset = (string) => {
-       setView(string); 
-    }
-
     return (
         <div className="user">
             <div className="div1">
@@ -84,6 +92,39 @@ const UserDetailComponent = (props) => {
                 {view === 'skuld' && <PayComponent id={userId}/>}
                 {view === 'historik' && <HistoryComponent id={userId} />}
             </div>
+
+            <div>
+         <div>
+            <IconButton onClick={() => setIsDrawer(true)}>
+              {!isDrawer ? <ReorderIcon /> : null }
+            </IconButton>
+          </div>
+          <Divider/>
+        <Drawer
+          variant="temporary"
+          open={isDrawer}
+          onClose={() => setIsDrawer(false)}
+        >
+          <Link to='/about'>
+            <List>
+              <ListItem button key='About Us'>
+                <ListItemIcon><AccountCircleIcon/>
+                </ListItemIcon>
+                <ListItemText primary='About Us' />
+              </ListItem>
+            </List>
+          </Link>
+          <Link to='/contact'>
+          <List>
+            <ListItem button key='Contact Us'>
+              <ListItemIcon><PermContactCalendarIcon/>
+              </ListItemIcon>
+              <ListItemText primary='Contact Us' />
+            </ListItem>
+            </List>
+          </Link>
+        </Drawer>
+      </div>
 
         </div>
     )

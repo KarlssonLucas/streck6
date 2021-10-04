@@ -1,10 +1,10 @@
 import React from 'react';
 import UserDetailPage from './pages/UserDetailPage';
-import AvatarPage from './pages/AvatarPage';
 import Dragg from './components/DraggComponent';
 import { BrowserRouter , Redirect, Route, Switch, useHistory} from 'react-router-dom';
 import "./css/mainpage.css";
 import LoginPage from './pages/LoginPage';
+import test from './components/test';
 
 export default class Strecklista extends React.Component {
 
@@ -31,13 +31,11 @@ export default class Strecklista extends React.Component {
             <div className="bodypage">
                 {this.state.loggedIn ? 
                 <div>
-                <Switch>
                 <div className="aaa">
                     <Redirect to={"/user/"+this.state.userid}/>
                     <Route exact path={"/user/"+this.state.userid} render={(props) => <UserDetailPage {...props} />} />
                     <Route exact path="/dragg" render={(props) => <Dragg {...props} />} />
                 </div>
-                </Switch>
                 </div>
                 : <LoginPage/>}
                         </div>

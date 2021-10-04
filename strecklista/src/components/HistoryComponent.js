@@ -1,6 +1,5 @@
 import "../css/historycomponent.css";
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 const HistoryComponent = (props) => {
     const [hist, setHist] = useState([]);
