@@ -1,7 +1,39 @@
 import fetch from "node-fetch";
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import "../css/loginpage.css";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import FilledInput from '@mui/material/FilledInput';
+
+const styles = makeStyles({
+  root: {
+    color: "#45a29e"
+  },
+  input: {
+    color: '#66fcf1'
+  },
+  customOutline: {
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#45a29e",
+    }
+  }
+});
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#45a29e',
+    },
+    secondary: {
+      main: '#45a29e',
+    },
+  },
+});
 
 const useLoginHook = (formValues) => {
   const [values, handleChange] = useState(formValues);
@@ -16,6 +48,7 @@ const useLoginHook = (formValues) => {
 
 const LoginPage = (props) => {
   
+  const classes = styles();
   const [loggedIn, setLoggedIn] = useState(false);
   const [wrongCredentials, setWrongCredentials] = useState(false);
   const [correctCredentials, setCorrectCredentials] = useState(false);
@@ -64,7 +97,7 @@ const LoginPage = (props) => {
       }
 
     })
-
+    window.location.reload();
   };
 
   const loginForm = (e) => {
@@ -76,15 +109,24 @@ const LoginPage = (props) => {
   return (
     <div className="loginpage">
         <form className="test">
-          <div className="">
-            <input id="username" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Username" />
-            <input id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} placeholder="Password"/>
-          </div>
-          <button class="loginbutton" onClick={() => login()}>Logga in</button>
+            <div className="streck6">
+                streck6
+            </div>
+            <ThemeProvider theme={theme}>
+            <Stack spacing={2}>
+              <TextField className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="username" color="primary" name="login" type="text" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Username" variant="outlined" />
+              <TextField className={classes.customOutline} InputLabelProps={{style: { color: '#45a29e' },}} InputProps={{style: {color: "white"}}} id="password" name="password" type="password" onChange={setCredentials} onKeyDown={(e) => loginForm(e)} label="Password" variant="outlined" />
+              <Button color="primary" variant="outlined" onClick={() => login()}>Logga in</Button>
+            </Stack>
+            </ThemeProvider>
         </form>
     </div>
   
   )
 };
 
-export default LoginPage;
+LoginPage.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(LoginPage);

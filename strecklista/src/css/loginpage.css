@@ -1,12 +1,12 @@
 :root {
-    --darkgrey: #1f2833;
-    --grey: #c5c6c7;
-    --lightblue: #66fcf1;
-    --darkblue: #45a29e;
+    --dg: #1f2833;
+    --g: #c5c6c7;
+    --lb: #66fcf1;
+    --db: #45a29e;
 }
 
 .loginpage {
-    background-color: var(--darkgrey);
+    background-color: var(--dg);
     display: flex;
     position: absolute;
     right: 0;
@@ -22,8 +22,8 @@
 }
 
 button.loginbutton {
-    background-image: linear-gradient(to right, var(--darkblue), var(--lightblue));
-    color: var(--darkgrey);
+    background-image: linear-gradient(to right, var(--db), var(--lb));
+    color: var(--dg);
     border: 0;
     outline: 0;
     width: 150px;
@@ -32,26 +32,15 @@ button.loginbutton {
 
 }
 
-label, input {
-    display: block;
-    margin-bottom: 25px;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    border-bottom: 1px solid var(--grey);
-    color: var(--grey);
+.streck6 {
+    color: white;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 20%;
+    font-size: 25px;
 }
 
-#username[type=text] {
-    background-image: url(icons8-anonymous-mask-16.png);
-    background-repeat: no-repeat;
-    padding-left: 20px;
-    padding-bottom: 10px;
-}
-
-#password {
-    background-image: url(icons8-key-16.png);
-    background-repeat: no-repeat;
-    padding-left: 20px;
-    padding-bottom: 10px;
-}

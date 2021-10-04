@@ -28,6 +28,7 @@ export default class Strecklista extends React.Component {
     render() {
         return (
             <BrowserRouter forceRefresh={false}>
+            <div className="bodypage">
                 {this.state.loggedIn ? 
                 <div>
                 <Switch>
@@ -39,8 +40,8 @@ export default class Strecklista extends React.Component {
                 </Switch>
                 </div>
                 : <LoginPage/>}
+                        </div>
             </BrowserRouter>
-
         )
     };
 }
