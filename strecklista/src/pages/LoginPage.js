@@ -20,7 +20,11 @@ const styles = makeStyles({
   customOutline: {
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: "#45a29e",
-    }
+    },
+    '&:hover:not($disabled):before': {
+      borderColor: '#45a29e',
+    },
+
   }
 });
 
