@@ -1,14 +1,40 @@
 .user {
     width: 18em;
     height: 42em;
+    text-align: center;
+    vertical-align: middle;
     margin: auto;
-    background-color: #09CDDA;
+    background-color: #1f2833;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
+
+.header {
+    color: white;
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    right:0;
+    left:0;
+    position: absolute;
+    font-size: 20px;
+}
+
+.testest {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    text-decoration: none;
+}
+
+a {
+    color: white;
+    text-decoration: none; /* no underline */
+  }
 
 .positive {
     color: green;

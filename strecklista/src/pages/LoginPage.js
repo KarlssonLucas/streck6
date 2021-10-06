@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import "../css/loginpage.css";
@@ -8,8 +7,6 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles'
-import {Redirect} from 'react-router-dom';
-
 
 const styles = makeStyles({
   root: {

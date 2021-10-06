@@ -14,10 +14,37 @@ import ReorderIcon from '@material-ui/icons/Reorder';
 import AccountCircleIcon from 
     '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#45a29e',
+    },
+    secondary: {
+      main: '#66fcf1',
+    },
+  },
+});
+
+const styles = makeStyles({
+  root: {
+    color: "#45a29e",
+  },
+  icon: {
+    width: 100,
+    height: 100,
+    padding: 10
+  },
+  paper: {
+    background: "#303945"
+  }
+});
 
 const UserDetailComponent = (props) => {
     const [isDrawer, setIsDrawer] = useState(false);
-
+    const classes = styles();
     var classNames = require('classnames');
     const location = useLocation()
     const [skuld, setSkuld] = useState([]);
@@ -68,11 +95,91 @@ const UserDetailComponent = (props) => {
         'clicked': view === 'streck',
         'unclicked': view !== 'streck'
     });
+    
+    const history = useHistory();
+
+    const logout = async () => {
+      await fetch("/api/logout").then((response : any) => response.json()).then((response) => { 
+        window.location.reload()
+      });   
+    }
 
     const skuldPay = skuld.map((s) => s.pay);
 
+    const drawerClick = (v) => {
+        setView(v);
+        setIsDrawer(false);
+    }
+
     return (
-        <div className="user">
+      <div>
+        <div>
+        <ThemeProvider theme={theme}>
+            <div>
+            <p className="header">streck6</p>
+
+              <IconButton className={classes.icon} className={classes.root} onClick={() => setIsDrawer(true)} color="secondary">
+                <ReorderIcon fontSize="large"/>
+              </IconButton>
+            </div>
+            <Drawer
+              variant="temporary"
+              open={isDrawer}
+              onClose={() => setIsDrawer(false)}
+              classes={{ paper: classes.paper }}
+            >
+              <div onClick = {() => drawerClick('streck')}>
+              <List>
+                <ListItem button key='Strecka'>
+                  <ListItemIcon><AccountCircleIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Strecka' />
+                </ListItem>
+              </List>
+              </div>
+              <div onClick = {() => drawerClick('historik')}>
+              <List>
+                  <ListItem button key='Historik'>
+                  <ListItemIcon><PermContactCalendarIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Historik' />
+                </ListItem>
+              </List>
+              </div>
+              <div onClick = {() => drawerClick('skuld')}>
+              <List>
+                  <ListItem button key='Inbetalning'>
+                  <ListItemIcon><PermContactCalendarIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Inbetalning' />
+                </ListItem>
+              </List>
+              </div>
+            <div className="testest" onClick={() => logout()}>
+              <Link to='/' replace>
+              <List>
+                  <ListItem button key='Logga ut'>
+                  <ListItemIcon><PermContactCalendarIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Logga ut' />
+                </ListItem>
+              </List>
+              </Link>
+            </div>
+          </Drawer>
+          </ThemeProvider>
+
+        </div>
+        <div className="div7">
+                {view === 'streck' && <StreckComponent id={userId}/>}  
+                {view === 'skuld' && <PayComponent id={userId}/>}
+                {view === 'historik' && <HistoryComponent id={userId} />}
+            </div>
+        </div>
+    )
+}
+/*<div className="user">
+          
             <div className="div1">
                 {user.map((u) => {return u.login})}
             </div>
@@ -92,42 +199,5 @@ const UserDetailComponent = (props) => {
                 {view === 'skuld' && <PayComponent id={userId}/>}
                 {view === 'historik' && <HistoryComponent id={userId} />}
             </div>
-
-            <div>
-         <div>
-            <IconButton onClick={() => setIsDrawer(true)}>
-              {!isDrawer ? <ReorderIcon /> : null }
-            </IconButton>
-          </div>
-          <Divider/>
-        <Drawer
-          variant="temporary"
-          open={isDrawer}
-          onClose={() => setIsDrawer(false)}
-        >
-          <Link to='/about'>
-            <List>
-              <ListItem button key='About Us'>
-                <ListItemIcon><AccountCircleIcon/>
-                </ListItemIcon>
-                <ListItemText primary='About Us' />
-              </ListItem>
-            </List>
-          </Link>
-          <Link to='/contact'>
-          <List>
-            <ListItem button key='Contact Us'>
-              <ListItemIcon><PermContactCalendarIcon/>
-              </ListItemIcon>
-              <ListItemText primary='Contact Us' />
-            </ListItem>
-            </List>
-          </Link>
-        </Drawer>
-      </div>
-
-        </div>
-    )
-}
-
+            </div>*/
 export default UserDetailComponent;
