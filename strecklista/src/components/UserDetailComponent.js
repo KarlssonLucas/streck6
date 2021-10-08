@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import StreckComponent from "./StreckComponent";
 import HistoryComponent from "./HistoryComponent";
 import PayComponent from "./PayComponent";
+import PersonalComponent from "./PersonalInfoComponent";
 import { Drawer, Divider, IconButton } 
     from '@material-ui/core';
 import { List, ListItem, ListItemIcon, ListItemText } 
@@ -100,8 +101,8 @@ const UserDetailComponent = (props) => {
 
     const logout = async () => {
       await fetch("/api/logout").then((response : any) => response.json()).then((response) => { 
-        window.location.reload()
       });   
+        window.location.reload()
     }
 
     const skuldPay = skuld.map((s) => s.pay);
@@ -170,6 +171,7 @@ const UserDetailComponent = (props) => {
           </ThemeProvider>
 
         </div>
+        {view === 'historik' && <PersonalComponent id={userId}/>}
         <div className="div7">
                 {view === 'streck' && <StreckComponent id={userId}/>}  
                 {view === 'skuld' && <PayComponent id={userId}/>}

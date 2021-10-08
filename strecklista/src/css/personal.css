@@ -1,0 +1,18 @@
+
+.personalMain {
+    background-color: #2b3745;
+    display: flex;
+    position: absolute;
+    right:0;
+    top: 60px;
+    left:0;
+    width: 80%;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+
+.personalContainer {
+
+}
