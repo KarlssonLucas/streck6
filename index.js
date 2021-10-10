@@ -12,7 +12,7 @@ app.use(session({
   secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60*60*1000 }}) // Inloggad max 1 timme?
+  cookie: { maxAge: 60*60*1000*3 }}) // Inloggad max 1 timme?
 )
 
 app.post('/api/login', db.login)
