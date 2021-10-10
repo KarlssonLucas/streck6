@@ -34,6 +34,8 @@ const HistoryComponent = (props) => {
    
     return (
         <div>
+            <p> hej </p>
+        <div>
         {hist.slice(0).reverse().map(i => (
             <div key={i.id} className="history">
                 <div key={i.id} className="historyitem">
@@ -44,6 +46,7 @@ const HistoryComponent = (props) => {
                 <div className="removeButton" onClick={() => removeFromHistory(i.id, i.streck, i.itemid)}> Delete </div>
             </div>
             ))}
+        </div>
         </div>
     )
 }

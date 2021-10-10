@@ -77,6 +77,13 @@ const LoginPage = (props) => {
         }
       });
     }
+
+    return () => {
+      setLoggedIn();
+      setWrongCredentials();
+      setCorrectCredentials();
+      setErrorLogin();
+    }
   }, [])
 
   const login = () => {

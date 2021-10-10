@@ -4,9 +4,7 @@ import Strecklista from './Strecklista';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-      <Strecklista />
-  </React.StrictMode>,
+      <Strecklista />,
   document.getElementById('root')
 );
 

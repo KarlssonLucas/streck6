@@ -128,7 +128,7 @@ const totstreck = (request, response) => {
 
 const tots = (request, response) => {
     if (!hasSession(request, response)) return;
-    client.query("select * from totstreck ORDER BY sum DESC", [], (error, results) => {
+    client.query("select * from totstreck LEFT JOIN totskuld ON uid = id ORDER BY sum DESC", [], (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {

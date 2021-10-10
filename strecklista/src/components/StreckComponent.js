@@ -19,6 +19,10 @@ const fetchItems = async () => {
 
 useEffect(() => {
     fetchItems();
+
+    return () => {
+        setItems();
+    }
 }, []);
 
     return (

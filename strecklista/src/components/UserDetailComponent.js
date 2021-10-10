@@ -4,18 +4,23 @@ import { useHistory, useLocation } from 'react-router-dom';
 import StreckComponent from "./StreckComponent";
 import HistoryComponent from "./HistoryComponent";
 import PayComponent from "./PayComponent";
-import { Drawer, Divider, IconButton } 
+import PersonalInfo from "./PersonalInfoComponent";
+import DraggComponent from "./DraggComponent";
+import { Drawer, IconButton } 
     from '@material-ui/core';
 import { List, ListItem, ListItemIcon, ListItemText } 
     from '@material-ui/core';
-import PermContactCalendarIcon from 
-    '@material-ui/icons/PermContactCalendar';
 import ReorderIcon from '@material-ui/icons/Reorder';
-import AccountCircleIcon from 
-    '@material-ui/icons/AccountCircle';
-import { Link } from 'react-router-dom';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LogoutIcon from '@mui/icons-material/Logout';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import HistoryIcon from '@mui/icons-material/History';
+import LocalBarIcon from '@mui/icons-material/LocalBar';
+import Divider from '@mui/material/Divider';
 
 const theme = createTheme({
   palette: {
@@ -75,26 +80,13 @@ const UserDetailComponent = (props) => {
 
     useEffect(() => {
         fetchSkuld();
-        console.log(props.id)
-            }, []);
-
-    var skuldClasses = classNames({
-        'div4': true,
-        'clicked': view === 'skuld',
-        'unclicked': view !== 'skuld'
-    });
-
-    var historikClasses = classNames({
-        'div5': true,
-        'clicked': view === 'historik',
-        'unclicked': view !== 'historik'
-    });
-
-    var streckClasses = classNames({
-        'div6': true,
-        'clicked': view === 'streck',
-        'unclicked': view !== 'streck'
-    });
+        
+        return () => {
+          setSkuld();
+          setSumstreck();
+          setUser();
+        }
+    }, []);
     
     const history = useHistory();
 
@@ -115,9 +107,18 @@ const UserDetailComponent = (props) => {
       <div>
         <div>
         <ThemeProvider theme={theme}>
-            <div>
+            <div  className="head">
             <p className="header">streck6</p>
 
+            <div className="wallet" onClick = {() => drawerClick('skuld')}> 
+            <List>
+                <ListItem button key='Strecka'>
+                  <ListItemIcon style={{minWidth: '30px', color: 'white'}}><AccountBalanceWalletIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary={skuldPay} />
+                </ListItem>
+              </List>
+            </div>
               <IconButton className={classes.icon} className={classes.root} onClick={() => setIsDrawer(true)} color="secondary">
                 <ReorderIcon fontSize="large"/>
               </IconButton>
@@ -128,52 +129,75 @@ const UserDetailComponent = (props) => {
               onClose={() => setIsDrawer(false)}
               classes={{ paper: classes.paper }}
             >
+              <div onClick = {() => drawerClick('you')}>
+              <List>
+                <ListItem button key='Du'>
+                  <ListItemIcon><AccountCircleIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Du' />
+                </ListItem>
+              </List>
+              </div>
+              <Divider/>
+
               <div onClick = {() => drawerClick('streck')}>
               <List>
-                <ListItem button key='Strecka'>
-                  <ListItemIcon><AccountCircleIcon/>
+                  <ListItem button key='streck'>
+                  <ListItemIcon><LocalBarIcon/>
                   </ListItemIcon>
                   <ListItemText primary='Strecka' />
                 </ListItem>
               </List>
               </div>
+              <Divider/>
               <div onClick = {() => drawerClick('historik')}>
               <List>
-                  <ListItem button key='Historik'>
-                  <ListItemIcon><PermContactCalendarIcon/>
+                  <ListItem button key='historik'>
+                  <ListItemIcon><HistoryIcon/>
                   </ListItemIcon>
                   <ListItemText primary='Historik' />
                 </ListItem>
               </List>
               </div>
+              <Divider/>
+              <div onClick = {() => drawerClick('dragg')}>
+              <List>
+                  <ListItem button key='Dragg'>
+                  <ListItemIcon><FormatListNumberedIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Drägglista' />
+                </ListItem>
+              </List>
+              </div>
+              <Divider/>
               <div onClick = {() => drawerClick('skuld')}>
               <List>
-                  <ListItem button key='Inbetalning'>
-                  <ListItemIcon><PermContactCalendarIcon/>
+                  <ListItem button key='inbetalning'>
+                  <ListItemIcon><AttachMoneyIcon/>
                   </ListItemIcon>
                   <ListItemText primary='Inbetalning' />
                 </ListItem>
               </List>
               </div>
             <div className="testest" onClick={() => logout()}>
-              <Link to='/' replace>
               <List>
                   <ListItem button key='Logga ut'>
-                  <ListItemIcon><PermContactCalendarIcon/>
+                  <ListItemIcon><LogoutIcon/>
                   </ListItemIcon>
                   <ListItemText primary='Logga ut' />
                 </ListItem>
               </List>
-              </Link>
             </div>
           </Drawer>
           </ThemeProvider>
 
         </div>
-        <div className="div7">
+        {view === 'you' && <PersonalInfo id={userId}/>}
+        <div className={view === 'you' ? '' : 'div7'}>
+                {view === 'historik' && <HistoryComponent id={userId} />}
                 {view === 'streck' && <StreckComponent id={userId}/>}  
                 {view === 'skuld' && <PayComponent id={userId}/>}
-                {view === 'historik' && <HistoryComponent id={userId} />}
+                {view === 'dragg' && <DraggComponent id={userId}/>}  
             </div>
         </div>
     )
