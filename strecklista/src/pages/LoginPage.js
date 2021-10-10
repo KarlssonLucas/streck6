@@ -86,7 +86,7 @@ const LoginPage = (props) => {
     }
   }, [])
 
-  const login = () => {
+  const login = async () => {
 
     const requestOptions = {
       method: 'POST',
@@ -96,7 +96,7 @@ const LoginPage = (props) => {
 
     console.log("SEND", requestOptions.body)
 
-    fetch("/api/login", requestOptions).then(response => response.json()).then(response => {
+    await fetch("/api/login", requestOptions).then(response => response.json()).then(response => {
       if (response === true) {
         setWrongCredentials(false);
         setCorrectCredentials(true);

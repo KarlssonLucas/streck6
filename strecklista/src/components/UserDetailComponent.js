@@ -92,8 +92,8 @@ const UserDetailComponent = (props) => {
 
     const logout = async () => {
       await fetch("/api/logout").then((response : any) => response.json()).then((response) => { 
-        window.location.reload()
       });   
+        window.location.reload()
     }
 
     const skuldPay = skuld.map((s) => s.pay);
