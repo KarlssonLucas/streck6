@@ -1,3 +1,41 @@
-.personalroot {
+.personalMain {
     
+}
+
+.personalContainer {
+    position: absolute;
+    overflow-y: scroll;
+    width: 90%;
+    height: 45vh;
+    background-color: #353D47;
+    border-radius: 7px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    right:0;
+    left:0;
+    bottom: 50px !important;
+    top: 100px !important;
+}
+
+.loginPersonal {
+    width: 90% !important;
+    margin-top: 20px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    border-color: white !important;
+    opacity: 95% !important;
+    color: #45a29e !important;
+
+}
+
+.updatePersonal {
+    width: 90% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    float: bottom !important;
+    margin-top: 15% !important;
+    height: 50px !important;
+    border-color: #45a29e !important;
+    color: #45a29e !important;
 }

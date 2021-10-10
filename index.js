@@ -12,10 +12,11 @@ app.use(session({
   secret: process.env.COOKIE_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60*60*1000*3 }}) // Inloggad max 1 timme?
+  cookie: { maxAge: 60*60*1000*3 }}) // Inloggad max 3 timmar
 )
 
 app.post('/api/login', db.login)
+app.post('/api/updatepassword/:id', db.updatepassword)
 app.get('/api/session', db.getSession)
 app.get('/api/logout', db.logout)
 app.get('/api/strecka/:userId/:itemId/:amount', db.strecka)

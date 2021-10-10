@@ -34,6 +34,27 @@ const login = (request, response) => {
       }
     );
   }
+
+  const updatepassword = (request, response) => {
+    if (!hasSession(request, response)) return;
+
+      const old = request.body.oldpass;
+      const newpass = request.body.newpass;
+      const id = parseInt(request.params.id);
+
+      client.query(
+      "UPDATE users SET password=$1 WHERE id=$2 AND password=$3", [newpass, id, old], 
+       (error, results) => {
+           if (error) {
+            response.status(500).send(false);
+           } else if (results.rowCount === 1) {
+            response.status(200).send(true);
+        } else {
+            response.status(500).send(false);
+        }
+       } 
+      )
+  }
   
   const getSession = (request, response) => {
     const session = {
@@ -242,5 +263,6 @@ module.exports = {
     tots,
     login,
     logout,
-    getSession
+    getSession,
+    updatepassword
 }
