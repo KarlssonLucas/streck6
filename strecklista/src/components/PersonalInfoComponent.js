@@ -4,6 +4,37 @@ import { useHistory } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles';
+
+const styles = makeStyles({
+  root: {
+    color: "#45a29e"
+  },
+  input: {
+    color: '#66fcf1'
+  },
+  customOutline: {
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#45a29e",
+    },
+    '&:hover:not($disabled):before': {
+      borderColor: '#45a29e',
+    },
+
+  }
+});
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#45a29e',
+    },
+    secondary: {
+      main: '#45a29e',
+    },
+  },
+});
 
 const useLoginHook = (formValues) => {
     const [values, handleChange] = useState(formValues);
@@ -23,6 +54,7 @@ const PersonalInfoComponent = (props) => {
         oldpass: "",
         newpass: ""
     });
+    const classes = styles();
 
     const updatePassword = async () => {
         console.log(parseInt(user.map((u) => {return u.id})))
@@ -71,7 +103,36 @@ const PersonalInfoComponent = (props) => {
     return (
         <div className="personalMain">
             <div className="personalContainer">
+                <ThemeProvider theme={theme}>
                 <Stack spacing={2}>
+                    <TextField 
+                    className={classes.customOutline}
+                    InputLabelProps={{style: { color: '#45a29e' },}} 
+                    InputProps={{style: {color: "white"}}} 
+                    id="username" 
+                    color="primary" 
+                    name="login" 
+                    type="text"         
+                    onChange={setCredentials} 
+                    onKeyDown={(e) => updateCheck(e)} 
+                    label="Username" 
+                    variant="outlined" />
+
+                    <TextField 
+                    className={classes.customOutline}
+                    InputLabelProps={{style: { color: '#45a29e' },}} 
+                    InputProps={{style: {color: "white"}}} 
+                    id="username" 
+                    color="primary" 
+                    name="login" 
+                    type="text"         
+                    onChange={setCredentials} 
+                    onKeyDown={(e) => updateCheck(e)} 
+                    label="Username" 
+                    variant="outlined" />
+
+
+
                 <TextField
                     disabled
                     InputLabelProps={{style: { color: '#242526'},}} 
@@ -110,6 +171,7 @@ const PersonalInfoComponent = (props) => {
                 />
                 <Button onClick={() => updatePassword()} className="updatePersonal" variant="outlined">Uppdatera information</Button>
                 </Stack>            
+                </ThemeProvider>
             </div>
         </div>
     )
