@@ -38,8 +38,8 @@ const login = (request, response) => {
   const updateInventory = (request, response) => {
     if (!hasSession(request, response)) return;
 
-      const id = parseInt(request.body.id);
-      const amountToAdd = request.body.amountToAdd;
+      const id = parseInt(request.params.id);
+      const amountToAdd = request.params.amount;
 
       client.query(
       "UPDATE inventory SET amount = amount + $1 WHERE item=$2", [amountToAdd, id], 
@@ -59,7 +59,7 @@ const login = (request, response) => {
     if (!hasSession(request, response)) return;
 
       client.query(
-      "select item, amount, name, pris from inventory left join items on item = id", [], 
+      "select item, amount, name, pris, unit from inventory left join items on item = id", [], 
        (error, results) => {
            if (error) {
                response.status(500).send(errorMsg("Internal server error"));

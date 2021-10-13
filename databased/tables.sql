@@ -54,5 +54,6 @@ CREATE TABLE Skuld (
 CREATE TABLE Inventory (
     item INT REFERENCES Items(id),
     amount INT DEFAULT 0,
+    unit TEXT NOT NULL,
     PRIMARY KEY (item)
 );

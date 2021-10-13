@@ -6,6 +6,7 @@ import HistoryComponent from "./HistoryComponent";
 import PayComponent from "./PayComponent";
 import PersonalInfo from "./PersonalInfoComponent";
 import DraggComponent from "./DraggComponent";
+import InventarieComponent from "./InventoryComponent";
 import { Drawer, IconButton } 
     from '@material-ui/core';
 import { List, ListItem, ListItemIcon, ListItemText } 
@@ -20,6 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import HistoryIcon from '@mui/icons-material/History';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import Divider from '@mui/material/Divider';
 
 const theme = createTheme({
@@ -179,6 +181,16 @@ const UserDetailComponent = (props) => {
                 </ListItem>
               </List>
               </div>
+              <Divider/>
+              <div onClick = {() => drawerClick('inventory')}>
+              <List>
+                  <ListItem button key='inventory'>
+                  <ListItemIcon><InventoryIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Inventarie' />
+                </ListItem>
+              </List>
+              </div>
             <div className="testest" onClick={() => logout()}>
               <List>
                   <ListItem button key='Logga ut'>
@@ -198,30 +210,9 @@ const UserDetailComponent = (props) => {
                 {view === 'streck' && <StreckComponent id={userId}/>}  
                 {view === 'skuld' && <PayComponent id={userId}/>}
                 {view === 'dragg' && <DraggComponent id={userId}/>}  
+                {view === 'inventory' && <InventarieComponent id={userId}/>}  
             </div>
         </div>
     )
 }
-/*<div className="user">
-          
-            <div className="div1">
-                {user.map((u) => {return u.login})}
-            </div>
-            <div className="div2">
-                Balance: <div className={skuldPay<0 ? "negative" : "positive"}> {skuldPay} </div> 
-            </div>
-            <div className="div3">
-                Totstreckat: {sumStreck.map((s) => {return (s.sum == parseInt(s.sum)) ? parseInt(s.sum) : s.sum })}
-            </div>
-            <div className="buttons">
-                <div className={skuldClasses} onClick={ () => setView('skuld')}> betala skuld </div>
-                <div className={historikClasses} onClick={ () => setView('historik')}> historik </div>
-                <div className={streckClasses} onClick={ () => setView('streck')}> strecka </div>
-            </div>
-            <div className="div7">
-                {view === 'streck' && <StreckComponent id={userId}/>}  
-                {view === 'skuld' && <PayComponent id={userId}/>}
-                {view === 'historik' && <HistoryComponent id={userId} />}
-            </div>
-            </div>*/
 export default UserDetailComponent;
