@@ -17,6 +17,8 @@ app.use(session({
 
 app.post('/api/login', db.login)
 app.post('/api/updatepassword/:id', db.updatepassword)
+app.post('/api/updateInventory', db.updateInventory)
+app.get('/api/inventory', db.getInventory)
 app.get('/api/session', db.getSession)
 app.get('/api/logout', db.logout)
 app.get('/api/strecka/:userId/:itemId/:amount', db.strecka)

@@ -46,7 +46,13 @@ CREATE TABLE betalt (
 );
 
 CREATE TABLE Skuld (
-    sid INT REFERENCES Users(id),
+    sid INT REFERENCES Users(id), 
     paid INT NOT NULL,
     owed INT NOT NULL
-)
+);
+
+CREATE TABLE Inventory (
+    item INT REFERENCES Items(id),
+    amount INT DEFAULT 0,
+    PRIMARY KEY (item)
+);

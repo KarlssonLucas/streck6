@@ -1,10 +1,48 @@
 import "../css/paycomponent.css";
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { withStyles } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
+const styles = (theme) => ({
+    stack: {
+        minWidth: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+
+    root: {
+        width: '50%',
+        alignItems: 'center',
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        left: '0',
+        right: '0',
+    },
+
+    button: {
+        borderColor: 'green',
+        color: 'green',
+    }
+});
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#32cd32',
+      },
+      secondary: {
+        main: '#32cd32',
+      },
+    },
+  });
 
 const PayComponent = (props) => {
+    const classes = styles();
     const [skuld, setSkuld] = useState(0);
 
     const fetchSkuld = async () => {
@@ -38,6 +76,7 @@ const PayComponent = (props) => {
    
     return (
         <div className="payMain">
+            <ThemeProvider theme={theme}>
             <Stack spacing={2}>
                 <input id="inputPay" key={skuld ? 'notLoadedYet' : 'loaded'} type="number" className="if" defaultValue={skuld<0 ? skuld*-1 : 0} />
                 <Button className="payButton" variant="outlined" onClick={() => document.getElementById("inputPay").value.match(/^[0-9]+$/) != null ? payDebt() : alert('hur full är du egentligen')}> Lägg till betalning </Button>
@@ -48,8 +87,9 @@ const PayComponent = (props) => {
                 </div>
 
             </Stack>
+            </ThemeProvider>
         </div>
     )
 }
 
-export default PayComponent;
+export default withStyles(styles)(PayComponent);

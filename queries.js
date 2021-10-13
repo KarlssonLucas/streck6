@@ -35,6 +35,41 @@ const login = (request, response) => {
     );
   }
 
+  const updateInventory = (request, response) => {
+    if (!hasSession(request, response)) return;
+
+      const id = parseInt(request.body.id);
+      const amountToAdd = request.body.amountToAdd;
+
+      client.query(
+      "UPDATE inventory SET amount = amount + $1 WHERE item=$2", [amountToAdd, id], 
+       (error, results) => {
+           if (error) {
+            response.status(500).send(false);
+           } else if (results.rowCount === 1) {
+            response.status(200).send(true);
+        } else {
+            response.status(500).send(false);
+        }
+       } 
+      )
+  }
+
+  const getInventory = (request, response) => {
+    if (!hasSession(request, response)) return;
+
+      client.query(
+      "select item, amount, name, pris from inventory left join items on item = id", [], 
+       (error, results) => {
+           if (error) {
+               response.status(500).send(errorMsg("Internal server error"));
+            } else {
+                response.status(200).json(results.rows);
+            }
+       } 
+      )
+  }
+
   const updatepassword = (request, response) => {
     if (!hasSession(request, response)) return;
 
@@ -265,5 +300,7 @@ module.exports = {
     login,
     logout,
     getSession,
-    updatepassword
+    updatepassword,
+    updateInventory,
+    getInventory
 }
