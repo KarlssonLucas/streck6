@@ -46,6 +46,7 @@ const login = (request, response) => {
       "UPDATE users SET password=$1 WHERE id=$2 AND password=$3", [newpass, id, old], 
        (error, results) => {
            if (error) {
+               console.log("hej");
             response.status(500).send(false);
            } else if (results.rowCount === 1) {
             response.status(200).send(true);

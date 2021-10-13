@@ -8,15 +8,28 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles({
-  root: {
-    color: "#45a29e"
-  },
+    stack: {
+        minWidth: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+
+    root: {
+        width: '50%',
+        alignItems: 'center',
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        left: '0',
+        right: '0',
+    },
   input: {
     color: '#66fcf1'
   },
   customOutline: {
     "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#45a29e",
+        borderColor: "#45a29e",
     },
     '&:hover:not($disabled):before': {
       borderColor: '#45a29e',
@@ -57,7 +70,6 @@ const PersonalInfoComponent = (props) => {
     const classes = styles();
 
     const updatePassword = async () => {
-        console.log(parseInt(user.map((u) => {return u.id})))
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -67,9 +79,11 @@ const PersonalInfoComponent = (props) => {
         await fetch("/api/updatepassword/"+user.map((u) => {return u.id}), requestOptions).then(response => response.json()).then(response => {
             console.log(response)
             if (response === true) {
+                console.log("yessir");
                 window.location.reload();
           }
             else {
+                console.log("yessir");
                 alert('Fel lösenord')
             }
           })
@@ -104,72 +118,34 @@ const PersonalInfoComponent = (props) => {
         <div className="personalMain">
             <div className="personalContainer">
                 <ThemeProvider theme={theme}>
-                <Stack spacing={2}>
+                <Stack spacing={2} className={classes.stack}>
                     <TextField 
-                    className={classes.customOutline}
+                    className={classes.customOutline+' '+'testPersonal'}
                     InputLabelProps={{style: { color: '#45a29e' },}} 
                     InputProps={{style: {color: "white"}}} 
                     id="username" 
                     color="primary" 
-                    name="login" 
-                    type="text"         
+                    name="oldpass" 
+                    type="password"         
                     onChange={setCredentials} 
                     onKeyDown={(e) => updateCheck(e)} 
-                    label="Username" 
+                    label="Old Password" 
                     variant="outlined" />
-
                     <TextField 
-                    className={classes.customOutline}
+                    className={classes.customOutline+' '+'testPersonal'}
                     InputLabelProps={{style: { color: '#45a29e' },}} 
                     InputProps={{style: {color: "white"}}} 
                     id="username" 
                     color="primary" 
-                    name="login" 
-                    type="text"         
+                    name="newpass" 
+                    type="password"         
                     onChange={setCredentials} 
                     onKeyDown={(e) => updateCheck(e)} 
-                    label="Username" 
+                    label="New Password" 
                     variant="outlined" />
+                
+        <Button onClick={() => updatePassword()} className="updatePersonal" variant="outlined">Uppdatera information</Button>
 
-
-
-                <TextField
-                    disabled
-                    InputLabelProps={{style: { color: '#242526'},}} 
-                    InputProps={{style: {color: "white"}}}
-                    className="loginPersonal"
-                    label="Login"
-                    id="filled-size-small"
-                    value={user.map((u) => {return u.login})}
-                    size="small"
-                />
-                <TextField
-                    InputLabelProps={{style: { color: '#45a29e' },}} 
-                    InputProps={{style: {color: "white"}}}
-                    className="loginPersonal"                
-                    label="Old Password"
-                    id="filled-size-small"
-                    defaultValue=""
-                    size="small"
-                    name="oldpass"
-                    type="password"
-                    onChange={setCredentials}
-                    onKeyDown={(e) => updateCheck(e)}
-                />
-                <TextField
-                    InputLabelProps={{style: { color: '#45a29e' },}} 
-                    InputProps={{style: {color: "white"}}}
-                    className="loginPersonal"               
-                    label="New Password"
-                    id="filled-size-small"
-                    defaultValue=""
-                    type="password"
-                    name="newpass"
-                    size="small"
-                    onChange={setCredentials}
-                    onKeyDown={(e) => updateCheck(e)}
-                />
-                <Button onClick={() => updatePassword()} className="updatePersonal" variant="outlined">Uppdatera information</Button>
                 </Stack>            
                 </ThemeProvider>
             </div>
