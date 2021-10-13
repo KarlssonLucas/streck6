@@ -144,7 +144,7 @@ const PersonalInfoComponent = (props) => {
                     label="New Password" 
                     variant="outlined" />
                 
-        <Button onClick={() => updatePassword()} className="updatePersonal" variant="outlined">Uppdatera information</Button>
+        <Button onClick={() => updatePassword()} className={classes.input + ' ' +'updatePersonal'} variant="outlined">Uppdatera information</Button>
 
                 </Stack>            
                 </ThemeProvider>
