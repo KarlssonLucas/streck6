@@ -1,15 +1,9 @@
 .history { 
-    display:block;    
-    background-color: lightgrey;
-    padding: 15px 15px 10px 15px;
-    margin: 10px;
-    height: 60px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-
+    display: block;
+    width: 100px;
+    background-color: green;
+    height: 100px;
+    margin-bottom: 10px;
 }
 
 .historyitem {
@@ -23,6 +17,12 @@
     padding: 10px;
 }
 
-.MuiPaper-root {
-    background-color: red !important;
+.muipaper {
+    width: 80vw !important;
+    background-color: pink !important;
+    height: 150px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

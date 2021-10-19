@@ -44,8 +44,8 @@ const HistoryComponent = (props) => {
     return (
         <div>
         {hist.slice(0).reverse().map(i => (
-            <div key={i.id} className="history">
-                <Paper elevation={3} classes={classes.paper}/>
+            <div key={i.id} className="">
+                <Paper elevation={6} className="muipaper"/>
             </div>
             ))}
         </div>
