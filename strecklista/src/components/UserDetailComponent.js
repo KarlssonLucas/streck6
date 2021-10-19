@@ -6,7 +6,6 @@ import HistoryComponent from "./HistoryComponent";
 import PayComponent from "./PayComponent";
 import PersonalInfo from "./PersonalInfoComponent";
 import DraggComponent from "./DraggComponent";
-import InventarieComponent from "./InventoryComponent";
 import { Drawer, IconButton } 
     from '@material-ui/core';
 import { List, ListItem, ListItemIcon, ListItemText } 
@@ -21,7 +20,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import HistoryIcon from '@mui/icons-material/History';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import Divider from '@mui/material/Divider';
 
 const theme = createTheme({
@@ -182,15 +180,6 @@ const UserDetailComponent = (props) => {
               </List>
               </div>
               <Divider/>
-              <div onClick = {() => drawerClick('inventory')}>
-              <List>
-                  <ListItem button key='inventory'>
-                  <ListItemIcon><InventoryIcon/>
-                  </ListItemIcon>
-                  <ListItemText primary='Inventarie' />
-                </ListItem>
-              </List>
-              </div>
             <div className="testest" onClick={() => logout()}>
               <List>
                   <ListItem button key='Logga ut'>
@@ -210,7 +199,6 @@ const UserDetailComponent = (props) => {
                 {view === 'streck' && <StreckComponent id={userId}/>}  
                 {view === 'skuld' && <PayComponent id={userId}/>}
                 {view === 'dragg' && <DraggComponent id={userId}/>}  
-                {view === 'inventory' && <InventarieComponent id={userId}/>}  
             </div>
         </div>
     )
