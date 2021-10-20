@@ -197,7 +197,7 @@ const tots = (request, response) => {
 const history = (request, response) => {
     if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
-    client.query("SELECT * FROM HistoryView WHERE sid = $1", [id], (error, results) => {
+    client.query("SELECT * FROM HistoryView WHERE sid = $1 ORDER BY id ASC", [id], (error, results) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {

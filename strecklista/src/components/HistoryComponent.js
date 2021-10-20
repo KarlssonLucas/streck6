@@ -56,7 +56,7 @@ const HistoryComponent = (props) => {
     useEffect(() => {
         getHistory();
     }, []);
-   
+    
     return (
         <div>
         {hist.slice(0).reverse().map(i => (
@@ -69,7 +69,7 @@ const HistoryComponent = (props) => {
                             <div> {i.time.substring(0,10)} </div>
                             <hr className="lineBreakHistory"></hr>
                             <ThemeProvider theme={theme}>
-                            <Button variant="outlined" startIcon={<DeleteIcon />}>Delete</Button>
+                                <Button variant="outlined" onClick={() => removeFromHistory(i.id, i.streck, i.itemid)}startIcon={<DeleteIcon />}>Delete</Button>
                             </ThemeProvider>
                         </div>
                     </Stack>
@@ -79,13 +79,4 @@ const HistoryComponent = (props) => {
         </div>
     )
 }
-/*
-<div key={i.id} className="historyitem">
-                    <div className="">{i.name} </div>
-                    <div className=""> {i.streck}{i.name === "Inbetalning" ? "kr" : "st"}  </div>
-                    <div className="">{i.time.substring(0,10)}</div>
-                </div>
-                <div className="removeButton" onClick={() => removeFromHistory(i.id, i.streck, i.itemid)}> Delete </div>
-                */
-
 export default HistoryComponent;
