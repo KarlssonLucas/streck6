@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import "../css/dragg.css";
 import { useHistory } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 
 const DraggComponent = (props) => {
     const [draggs, setDraggs] = useState([]);
+    var topl = 0;
     
 const fetchItems = async () => {
     const requestOptions = {
@@ -15,13 +18,28 @@ const fetchItems = async () => {
     });
 }
 
+const incTopl = () => {
+    topl +=1;
+}
+
 useEffect(() => {
     fetchItems();
 }, []);
 
     return (
-        <div className="">
-            {draggs.map(i => ( <p key={i.id}> {i.login}: {i.sum} </p> ))}
+        <div className="draggmain">
+            {draggs.map(i => ( 
+                <div key={i.id} className="content">
+                    {incTopl()}
+                    <p className="topl"> {topl}. </p> 
+                    <div className="draggInd"> 
+                        {i.login} <br /> 
+                        Streckat: {i.sum - 0} enheter <br /> 
+                        Deg: {i.pay} 
+                    </div> 
+                    <hr className="linebreak"></hr>
+                </div>
+            ))}
         </div>
     )
 }

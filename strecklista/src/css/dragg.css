@@ -1,0 +1,40 @@
+:root {
+    --dg: #1f2833;
+    --g: #c5c6c7;
+    --lb: #66fcf1;
+    --db: #45a29e;
+}
+
+.draggInd {
+    color: white;
+    width: 90hh;
+    display:block;    
+    padding: 15px 15px 10px 15px;
+    margin: 10px;
+    position: relative;
+}
+
+.content {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 20%;
+    font-size: 15px;
+}
+
+.linebreak {
+    height: 1px;
+    margin: 20px;
+    background-image: linear-gradient(to right, var(--db), var(--lb));
+    border: #66fcf1;
+}    
+
+.topl {
+    position: absolute;
+    vertical-align: middle;
+    left: 10%;
+    margin-top: 33px;
+}

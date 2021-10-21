@@ -3,6 +3,8 @@ INSERT INTO Items VALUES(DEFAULT,'kosken 2cl', 4);
 INSERT INTO Items VALUES(DEFAULT,'eybro', 10);
 INSERT INTO Items VALUES(DEFAULT, 'Cider', 10);
 INSERT INTO Items VALUES(DEFAULT,'HalmstadCrush', 16);
+INSERT INTO Items VALUES(DEFAULT, 'Powerking', 6);
+INSERT INTO Items VALUES(DEFAULT, 'Billys', 20);
 INSERT INTO Items VALUES(99, 'Inbetalning', 0);
 
 INSERT INTO Roles VALUES(1, 'admin');

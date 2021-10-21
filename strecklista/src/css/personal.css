@@ -1,0 +1,50 @@
+.personalMain {
+    
+}
+
+.personalContainer {
+    position: absolute !important;
+    overflow-y: scroll !important;
+    width: 80% !important;
+    height: 45vh !important;
+    background-color: #353D47 !important;
+    border-radius: 7px !important;
+    display: block !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    right:0 !important;
+    left:0 !important;
+    bottom: 50px !important;
+    top: 100px !important;
+}
+
+.testPersonal {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 90%;
+    top: 25px;
+}
+
+.loginPersonal {
+    width: 90% !important;
+    margin-top: 20px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    border-color: white !important;
+    opacity: 95% !important;
+    color: #45a29e !important;
+
+}
+
+.updatePersonal {
+    width: 90% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    float: bottom !important;
+    margin-top: 15% !important;
+    height: 50px !important;
+    border-color: #45a29e !important;
+    color: #45a29e !important;
+}
