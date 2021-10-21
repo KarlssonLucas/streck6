@@ -3,7 +3,7 @@
     background-color: #1f2833 !important;
     color: white !important;
     border-radius: 5px !important;
-    padding: 15px 15px 10px 15px !important;
+    padding: 15px 15px 15px 15px !important;
     margin: 10px !important;
     width: 100px !important;
     height: 100px !important;
@@ -20,7 +20,7 @@
 .buttonBuy2 {
     border-color: black !important;
     color: black !important;
-    margin-top: 15px !important;
+    margin-top: 10px !important;
 }
 
 .inputfield {

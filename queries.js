@@ -1,6 +1,8 @@
 const { request, response } = require("express");
 const fetch = require("node-fetch");
 const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const logout = (request, response) => {
     request.session.destroy();
@@ -8,29 +10,31 @@ const logout = (request, response) => {
   }
   
 //Login user by mail and password matching
-const login = (request, response) => {  
+const login = (request, response) => { 
     const id = request.body.login;
     const password = request.body.password;
-  
+
     client.query(
-      "SELECT * FROM users where login=$1 AND password=$2",
-      [id, password],
+      "SELECT * FROM users where login=$1",
+      [id],
       (error, result) => {
         if (error) {
           response.status(500).send(errorMsg("Internal server error"));
         }
-        else if (result.rows.length === 1) { // SUCCESS LOGIN 
-          request.session.isLoggedIn = true;
-          request.session.userId = result.rows[0].id;
-          request.session.name = result.rows[0].login;
-          console.log("SESSION SET")
-          response.status(200).send(true);
-        }
-        else {
-          console.log("SESSION DESTROY")
-          request.session.destroy();
-          response.status(400).send(errorMsg("Wrong credentials"));
-        }
+
+        bcrypt.compare(password, result.rows[0].password, function(err, res) {
+            if (res === true) {
+                request.session.isLoggedIn = true;
+                request.session.userId = result.rows[0].id;
+                request.session.name = result.rows[0].login;
+                console.log("SESSION SET")
+                response.status(200).send(true);
+            } else {
+                console.log("SESSION DESTROY")
+                request.session.destroy();
+                response.status(400).send(errorMsg("Wrong credentials"));
+            }
+        });
       }
     );
   }
@@ -78,18 +82,35 @@ const login = (request, response) => {
       const id = parseInt(request.params.id);
 
       client.query(
-      "UPDATE users SET password=$1 WHERE id=$2 AND password=$3", [newpass, id, old], 
-       (error, results) => {
-           if (error) {
-               console.log("hej");
-            response.status(500).send(false);
-           } else if (results.rowCount === 1) {
-            response.status(200).send(true);
-        } else {
-            response.status(500).send(false);
-        }
-       } 
-      )
+        "SELECT * FROM Users WHERE id=$1", [id], 
+         (error, results) => {
+             if (error) {
+              response.status(500).send(false);
+             }
+
+          bcrypt.compare(old, results.rows[0].password, function(err, res) {
+            if (res === true) {
+                updatePass(newpass, id);
+                response.status(200).send(true);
+            } else {
+                response.status(200).send(true);
+            }
+        });
+         } 
+        )
+  }
+
+  const updatePass = (newpass, id) => {
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(newpass, salt, (err, hash) => {
+            client.query(
+                "UPDATE users SET password=$1 WHERE id=$2", [hash, id], 
+                 (error, results) => {
+                     console.log("PASSWORD UPDATED")
+                 } 
+                )
+        });
+    });
   }
   
   const getSession = (request, response) => {
