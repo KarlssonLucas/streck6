@@ -87,6 +87,10 @@ const UserDetailComponent = (props) => {
           setUser();
         }
     }, []);
+
+    const logParent = () => {
+      fetchSkuld();
+    }
     
     const history = useHistory();
 
@@ -195,9 +199,9 @@ const UserDetailComponent = (props) => {
         </div>
         {view === 'you' && <PersonalInfo id={userId}/>}
         <div className={view === 'you' ? '' : 'div7'}>
-                {view === 'historik' && <HistoryComponent id={userId} />}
-                {view === 'streck' && <StreckComponent id={userId}/>}  
-                {view === 'skuld' && <PayComponent id={userId}/>}
+                {view === 'historik' && <HistoryComponent id={userId} logParent={logParent}/>}
+                {view === 'streck' && <StreckComponent id={userId} logParent={logParent}/>}  
+                {view === 'skuld' && <PayComponent id={userId} logParent={logParent}/>}
                 {view === 'dragg' && <DraggComponent id={userId}/>}  
             </div>
         </div>

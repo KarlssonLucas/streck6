@@ -93,7 +93,7 @@ const login = (request, response) => {
                 updatePass(newpass, id);
                 response.status(200).send(true);
             } else {
-                response.status(200).send(true);
+                response.status(200).send(false);
             }
         });
          } 

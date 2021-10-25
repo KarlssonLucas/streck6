@@ -23,8 +23,7 @@ const StreckItemComponent = (props) => {
         };
 
         await fetch("/api/strecka/"+props.user +"/"+props.id+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
-            console.log("done");
-            window.location.reload(false);
+            props.logParent();
         });
     }
 

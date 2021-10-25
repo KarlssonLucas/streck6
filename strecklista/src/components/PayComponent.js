@@ -64,8 +64,8 @@ const PayComponent = (props) => {
         };
 
         await fetch("/api/pay/"+props.id +"/" + parseInt(document.getElementById("inputPay").value), requestOptions).then((response : any) => response.json()).then((response) => {
-            console.log("done")
-            window.location.reload(false);
+            props.logParent();
+            alert('Betalning tillagd');
         });
     }
 
