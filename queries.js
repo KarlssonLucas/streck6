@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const apisecret = process.env.API_KEY;
 
 const logout = (request, response) => {
     request.session.destroy();
@@ -229,18 +230,22 @@ const history = (request, response) => {
 
 
 const strecka = (request, response) => {
-    if (!hasSession(request, response)) return;
+    const apikey = request.query.apikey;
     const id = parseInt(request.params.userId);
     const item = parseInt(request.params.itemId);
     const amount = parseInt(request.params.amount);
-    client.query("INSERT INTO NewStreckat (uid, streck, item) VALUES ($1,$2,$3)", [id, amount, item], (error, results) => {
-        if (error) {
-            response.status(500).send(errorMsg("Internal server error"));
-        } else {
-            console.log(results)
-            response.status(200).json(results.rows);
-        }
-    });
+
+    if (apikey == apisecret || hasSession(request, response)) {
+        client.query("INSERT INTO NewStreckat (uid, streck, item) VALUES ($1,$2,$3)", [id, amount, item], (error, results) => {
+            if (error) {
+                response.status(500).send(errorMsg("Internal server error"));
+            } else {
+                response.status(200).json(results.rows);
+            }
+        });
+    } else {
+        return;
+    } 
 };
 
 const pay = async (request, response) => {
@@ -253,7 +258,6 @@ const pay = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results)
         }
     });
 
@@ -261,7 +265,6 @@ const pay = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results)
             response.status(200).json(results.rows);
         }
     });
@@ -281,7 +284,6 @@ const remove = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results)
         }
     });
 
@@ -289,7 +291,6 @@ const remove = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results);
         }
     });
 
@@ -298,7 +299,6 @@ const remove = async (request, response) => {
             if (error) {
                 response.status(500).send(errorMsg("Internal server error"));
             } else {
-                console.log(results)
             }
         });
     }
