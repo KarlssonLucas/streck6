@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const path = require('path');
 const apisecret = process.env.API_KEY;
 
 const logout = (request, response) => {
@@ -244,7 +245,7 @@ const strecka = (request, response) => {
             if (error) {
                 response.status(500).send(errorMsg("Internal server error"));
             } else {
-                response.status(200).json(results.rows);
+                response.sendFile(path.join(__dirname, '/return.html'));
             }
         });
     } else {
