@@ -21,7 +21,11 @@ const login = (request, response) => {
       (error, result) => {
         if (error) {
           response.status(500).send(errorMsg("Internal server error"));
-        }
+        } else if (result.rows.length != 1) {
+            request.session.destroy();
+            response.status(400).send(errorMsg("Wrong credentials"));
+            return;
+        } 
 
         bcrypt.compare(password, result.rows[0].password, function(err, res) {
             if (res === true) {
