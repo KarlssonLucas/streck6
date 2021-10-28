@@ -8,6 +8,7 @@ Digital management for committee inventory.
 * Admin managing users page
 * Payment and buy history
 * Buy items directly from page
+* Hash and salts password with bcrypt
 
 ## Technicals 
 This webapp is written with a pg express backend and react frontend using materials UI components. 
@@ -16,7 +17,6 @@ loggedIn information in a session so that you don't have to log in until the ses
 webpage we personally use is hosted at heroku with the psql addon. 
 
 ## For the future
-* Hash passwords
 * Managing users page
 * Structure the API and structure the frontend.
 * Safer way of storing sessions
