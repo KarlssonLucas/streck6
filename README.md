@@ -3,7 +3,7 @@ Digital management for committee inventory.
 
 ## Features
 * Individual accounts 
-* Add payments directly
+* Make payments to the bank
 * Change user password
 * Admin managing users page
 * Payment and buy history
