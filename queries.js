@@ -245,7 +245,7 @@ const strecka = (request, response) => {
             if (error) {
                 response.status(500).send(errorMsg("Internal server error"));
             } else {
-                response.sendFile(path.join(__dirname, '/return.html'));
+                response.status(200).json(results.rows);
             }
         });
     } else {
