@@ -13,8 +13,10 @@ const logout = (request, response) => {
   
 //Login user by mail and password matching
 const login = (request, response) => { 
-    const id = request.body.login;
+    const id = request.body.login.toString().toLowerCase();
     const password = request.body.password;
+
+    console.log(id);
 
     client.query(
       "SELECT * FROM users where login=$1",
