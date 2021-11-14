@@ -178,15 +178,21 @@ const streckatById = (request, response) => {
 };
 
 const skuldById = (request, response) => {
-    if (!hasSession(request, response)) return;
+    const apikey = request.query.apikey;
     const id = parseInt(request.params.id);
-    client.query("SELECT * FROM totskuld WHERE uid = $1", [id], (error, results) => {
-        if (error) {
+
+    if (apikey == apisecret || hasSession(request, response)) {
+        client.query("SELECT * FROM totskuld WHERE uid = $1", [id], (error, results) => {
+            if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
             response.status(200).json(results.rows);
         }
-    });
+        });
+    } else {
+        return;
+    } 
+    
 };
 
 const items = (request, response) => {
