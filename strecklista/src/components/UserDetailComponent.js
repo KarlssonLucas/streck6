@@ -22,6 +22,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import Divider from '@mui/material/Divider';
 
+// Materials UI Styling
 const theme = createTheme({
   palette: {
     primary: {
@@ -33,6 +34,7 @@ const theme = createTheme({
   },
 });
 
+// Materials UI Styling
 const styles = makeStyles({
   root: {
     color: "#45a29e",
@@ -58,6 +60,7 @@ const UserDetailComponent = (props) => {
     const [view, setView] = useState('streck');
     const userId = /[^/]*$/.exec(location.pathname)[0];
 
+    // Fetch the debt collected by a user
     const fetchSkuld = async () => {
         const requestOptions = {
             method: 'GET',
@@ -88,20 +91,25 @@ const UserDetailComponent = (props) => {
         }
     }, []);
 
+    // function that runs from child component
     const logParent = () => {
       fetchSkuld();
     }
     
+    // For redirection
     const history = useHistory();
 
+    // Logout the user and destroy the cookie
     const logout = async () => {
       await fetch("/api/logout").then((response : any) => response.json()).then((response) => { 
       });   
         window.location.reload()
     }
 
+    // For getting the current users debt
     const skuldPay = skuld.map((s) => s.pay);
 
+    // Page drawer, basically the menu in the topleft corner
     const drawerClick = (v) => {
         setView(v);
         setIsDrawer(false);

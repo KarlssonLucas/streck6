@@ -5,15 +5,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-import { Divider } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+// Materials UI Styling
 const styles = makeStyles({
     paper: {
         backgroundColor: 'red'
     },
 });
 
+// Materials UI Styling
 const theme = createTheme({
     palette: {
       primary: {
@@ -29,6 +30,7 @@ const HistoryComponent = (props) => {
     const [hist, setHist] = useState([]);
     const classes = styles();
 
+    // Gets the history through the API
     const getHistory = async () => {
         const requestOptions = {
             method: 'GET',
@@ -40,6 +42,7 @@ const HistoryComponent = (props) => {
         });
     }
 
+    // Uses the API to remove a 'streck' from history
     const removeFromHistory = async (hid, amount, itemid) => {
         const requestOptions = {
             method: 'GET',
@@ -52,6 +55,7 @@ const HistoryComponent = (props) => {
         });
     }
 
+    // Upon loading, log parent and get history
     useEffect(() => {
         props.logParent();
         getHistory();

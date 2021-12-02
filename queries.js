@@ -6,6 +6,7 @@ const saltRounds = 10;
 const path = require('path');
 const apisecret = process.env.API_KEY;
 
+// Function for destroying the cookie once the unser wants to logout
 const logout = (request, response) => {
     request.session.destroy();
     response.status(200).send(true);
@@ -47,6 +48,7 @@ const login = (request, response) => {
     );
   }
 
+  // For managing the inventory, updating already set amounts
   const updateInventory = (request, response) => {
     if (!hasSession(request, response)) return;
 
@@ -67,6 +69,7 @@ const login = (request, response) => {
       )
   }
 
+  // Getting the inventory from the database
   const getInventory = (request, response) => {
     if (!hasSession(request, response)) return;
 
@@ -82,6 +85,7 @@ const login = (request, response) => {
       )
   }
 
+  // Update the user passwords, hash the password and compare with the one stored in the database
   const updatepassword = (request, response) => {
     if (!hasSession(request, response)) return;
 
@@ -108,6 +112,7 @@ const login = (request, response) => {
         )
   }
 
+  // Helper function for the func above
   const updatePass = (newpass, id) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(newpass, salt, (err, hash) => {
@@ -121,6 +126,7 @@ const login = (request, response) => {
     });
   }
   
+  // Gets the session for the person entering the website
   const getSession = (request, response) => {
     const session = {
       login: request.session.isLoggedIn === true,
@@ -130,6 +136,7 @@ const login = (request, response) => {
     response.status(200).send(session);
   }
 
+// Gets all the users from the database
 const users = (request, response) => {
     if (!hasSession(request, response)) return;
     client.query("SELECT * FROM Users", (error, results) => {
@@ -141,6 +148,7 @@ const users = (request, response) => {
     });
 };
 
+// Gets information about a specific user given their ID
 const usersById = (request, response) => {
     if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
@@ -153,7 +161,7 @@ const usersById = (request, response) => {
     });
 };
 
-
+// Gets all the 'streck' 
 const streckat = (request, response) => {
     if (!hasSession(request, response)) return;
     client.query("SELECT * FROM Streckat", (error, results) => {
@@ -165,6 +173,7 @@ const streckat = (request, response) => {
     });
 };
 
+// Gets all the 'streck' associated with a user
 const streckatById = (request, response) => {
     if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
@@ -177,6 +186,7 @@ const streckatById = (request, response) => {
     });
 };
 
+// Gets the debt from a userID
 const skuldById = (request, response) => {
     const apikey = request.query.apikey;
     const id = parseInt(request.params.id);
@@ -195,6 +205,7 @@ const skuldById = (request, response) => {
     
 };
 
+// Gets all the items once can 'streck'
 const items = (request, response) => {
     if (!hasSession(request, response)) return;
     client.query("SELECT * FROM Items", (error, results) => {
@@ -206,6 +217,7 @@ const items = (request, response) => {
     });
 };
 
+// Everything a user has given their ID
 const totstreck = (request, response) => {
     if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
@@ -218,6 +230,7 @@ const totstreck = (request, response) => {
     });
 };
 
+// All users debt and the amount of items they've 'strecked' for
 const tots = (request, response) => {
     if (!hasSession(request, response)) return;
     client.query("select * from totstreck LEFT JOIN totskuld ON uid = id ORDER BY sum DESC", [], (error, results) => {
@@ -229,6 +242,7 @@ const tots = (request, response) => {
     });
 };
 
+// The history of a users 'strecked' items and amount
 const history = (request, response) => {
     if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
@@ -241,7 +255,7 @@ const history = (request, response) => {
     });
 };
 
-
+// Function that handles 'streck' by a user, inserting triggers my trigger which checks if it is a okey streck
 const strecka = (request, response) => {
     const apikey = request.query.apikey;
     const id = parseInt(request.params.userId);
@@ -261,6 +275,7 @@ const strecka = (request, response) => {
     } 
 };
 
+// Executes when a user adds a payment in the frontend
 const pay = async (request, response) => {
     if (!hasSession(request, response)) return;
     const id = parseInt(request.params.id);
@@ -284,6 +299,7 @@ const pay = async (request, response) => {
 
 };
 
+//Removes something from the history, deletes both the streck and the history of it
 const remove = async (request, response) => {
     if (!hasSession(request, response)) return;
     const userid = parseInt(request.params.id);

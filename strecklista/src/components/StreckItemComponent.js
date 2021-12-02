@@ -1,12 +1,9 @@
 import "../css/streckitemcomponent.css";
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
 
@@ -15,6 +12,7 @@ const StreckItemComponent = (props) => {
     const [amount, setAmount] = useState(1);
     const [open, setOpen] = useState(false);
 
+    //Try to streck, backend check if its possible
     const streckInsert = async () => {
         handleClose();
         const requestOptions = {
@@ -27,6 +25,7 @@ const StreckItemComponent = (props) => {
         props.logParent();
     }
 
+    // Open and close the detailview for the item
     const handleClickOpen = () => {
         setOpen(true);
     };
