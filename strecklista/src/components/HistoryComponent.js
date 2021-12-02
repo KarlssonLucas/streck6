@@ -36,7 +36,6 @@ const HistoryComponent = (props) => {
         };
 
         await fetch("/api/history/"+props.id, requestOptions).then((response : any) => response.json()).then((response) => {
-            console.log(response);
             setHist(response);
         });
     }
@@ -48,12 +47,13 @@ const HistoryComponent = (props) => {
         };
 
         await fetch("/api/remove/"+props.id+"/"+hid+"/"+itemid+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
-            console.log(response);
-            window.location.reload(false);
+            props.logParent();
+            getHistory();
         });
     }
 
     useEffect(() => {
+        props.logParent();
         getHistory();
     }, []);
     

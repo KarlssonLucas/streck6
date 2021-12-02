@@ -79,13 +79,12 @@ const PersonalInfoComponent = (props) => {
         await fetch("/api/updatepassword/"+user.map((u) => {return u.id}), requestOptions).then(response => response.json()).then(response => {
             console.log(response)
             if (response === true) {
-                console.log("yessir");
                 window.location.reload();
+                alert('Ditt lösenord är uppdaterat')
           }
             else {
-                console.log("yessir");
                 alert('Fel lösenord')
-            }
+              }
           })
     }
 
