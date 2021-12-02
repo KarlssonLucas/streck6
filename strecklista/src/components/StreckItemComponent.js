@@ -9,6 +9,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles'
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#32CD32',
+      },
+      secondary: {
+        main: '#66fcf1',
+      },
+    },
+  });
 
 const StreckItemComponent = (props) => {
     const [items, setItems] = useState([]);
@@ -37,6 +50,7 @@ const StreckItemComponent = (props) => {
     };
    
     return (
+        <ThemeProvider theme={theme}>
         <Paper className="item" elevation={6}>
             <div> {props.name} </div> 
             <div> {props.pris} kr</div> 
@@ -61,6 +75,7 @@ const StreckItemComponent = (props) => {
         </DialogContent>
       </Dialog>
         </Paper>
+    </ThemeProvider>
     )
 }
 export default StreckItemComponent;
