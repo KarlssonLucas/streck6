@@ -79,11 +79,11 @@ const PayComponent = (props) => {
             <ThemeProvider theme={theme}>
             <Stack spacing={2}>
                 <input id="inputPay" key={skuld ? 'notLoadedYet' : 'loaded'} type="number" className="if" defaultValue={skuld<0 ? skuld*-1 : 0} />
-                <Button className="payButton" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value.match(/^[0-9]+$/) != null ? payDebt() : alert('hur full är du egentligen')}> Lägg till betalning </Button>
+                <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="payButton" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value.match(/^[0-9]+$/) != null ? payDebt() : alert('hur full är du egentligen')}> Lägg till betalning </Button>
                 <div className="addToPay"> 
-                    <Button className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 50} > +50 </Button>
-                    <Button className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 100}>  +100 </Button>
-                    <Button className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 500}>  +500 </Button>
+                    <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 50} > +50 </Button>
+                    <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 100}>  +100 </Button>
+                    <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 500}>  +500 </Button>
                 </div>
 
             </Stack>

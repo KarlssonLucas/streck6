@@ -23,7 +23,26 @@ const theme = createTheme({
     },
   });
 
+  const styles = makeStyles({
+    root: {
+      color: "#32CD32"
+    },
+    input: {
+      color: '#66fcf1'
+    },
+    customOutline: {
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#45a29e",
+      },
+      '&:hover:not($disabled):before': {
+        borderColor: '#45a29e',
+      },
+  
+    }
+  });
+
 const StreckItemComponent = (props) => {
+    const classes = styles();
     const [items, setItems] = useState([]);
     const [amount, setAmount] = useState(1);
     const [open, setOpen] = useState(false);
@@ -53,7 +72,7 @@ const StreckItemComponent = (props) => {
         <Paper className="item" elevation={6}>
             <div> {props.name} </div> 
             <div> {props.pris} kr</div> 
-            <Button className="buttonBuy" variant="outlined" onClick={handleClickOpen}>Köp</Button>
+            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className={'buttonBuy'} variant="outlined" onClick={handleClickOpen}>Köp</Button>
         <Dialog
         open={open}
         onClose={handleClose}
@@ -65,11 +84,11 @@ const StreckItemComponent = (props) => {
         <DialogContent>
             <Stack>
             <div> 
-                <Button onClick={() => amount<2 ? true : setAmount(amount-1)} variant="outlined" className="subtract">-</Button>
+                <Button style={{height: '32px', borderRadius: '3px', border: '1px solid', borderColor: 'red', color: 'red'}} onClick={() => amount<2 ? true : setAmount(amount-1)} variant="outlined" className="subtract">-</Button>
                 <input type="text" className="inputfield" readOnly={true} value={amount}/>
-                <Button onClick={() => setAmount(amount+1)} variant="outlined" className="addition">+</Button>
+                <Button style={{height: '32px', borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} onClick={() => setAmount(amount+1)} variant="outlined" className="addition">+</Button>
             </div>
-            <Button onClick={() => streckInsert()} variant="outlined" className="buttonBuy2">{props.pris * amount} kr</Button>
+            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} onClick={() => streckInsert()} variant="outlined" className="buttonBuy2">{props.pris * amount} kr</Button>
         </Stack>
         </DialogContent>
       </Dialog>
