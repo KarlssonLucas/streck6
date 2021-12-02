@@ -3,6 +3,8 @@ const fetch = require("node-fetch");
 const { client, hasSession, errorMsg, escape, getUserId } = require("./utils")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const path = require('path');
+const apisecret = process.env.API_KEY;
 
 const logout = (request, response) => {
     request.session.destroy();
@@ -11,8 +13,10 @@ const logout = (request, response) => {
   
 //Login user by mail and password matching
 const login = (request, response) => { 
-    const id = request.body.login;
+    const id = request.body.login.toString().toLowerCase();
     const password = request.body.password;
+
+    console.log(id);
 
     client.query(
       "SELECT * FROM users where login=$1",
@@ -20,7 +24,11 @@ const login = (request, response) => {
       (error, result) => {
         if (error) {
           response.status(500).send(errorMsg("Internal server error"));
-        }
+        } else if (result.rows.length != 1) {
+            request.session.destroy();
+            response.status(400).send(errorMsg("Wrong credentials"));
+            return;
+        } 
 
         bcrypt.compare(password, result.rows[0].password, function(err, res) {
             if (res === true) {
@@ -93,7 +101,7 @@ const login = (request, response) => {
                 updatePass(newpass, id);
                 response.status(200).send(true);
             } else {
-                response.status(200).send(true);
+                response.status(200).send(false);
             }
         });
          } 
@@ -170,15 +178,21 @@ const streckatById = (request, response) => {
 };
 
 const skuldById = (request, response) => {
-    if (!hasSession(request, response)) return;
+    const apikey = request.query.apikey;
     const id = parseInt(request.params.id);
-    client.query("SELECT * FROM totskuld WHERE uid = $1", [id], (error, results) => {
-        if (error) {
+
+    if (apikey == apisecret || hasSession(request, response)) {
+        client.query("SELECT * FROM totskuld WHERE uid = $1", [id], (error, results) => {
+            if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
             response.status(200).json(results.rows);
         }
-    });
+        });
+    } else {
+        return;
+    } 
+    
 };
 
 const items = (request, response) => {
@@ -229,18 +243,22 @@ const history = (request, response) => {
 
 
 const strecka = (request, response) => {
-    if (!hasSession(request, response)) return;
+    const apikey = request.query.apikey;
     const id = parseInt(request.params.userId);
     const item = parseInt(request.params.itemId);
     const amount = parseInt(request.params.amount);
-    client.query("INSERT INTO NewStreckat (uid, streck, item) VALUES ($1,$2,$3)", [id, amount, item], (error, results) => {
-        if (error) {
-            response.status(500).send(errorMsg("Internal server error"));
-        } else {
-            console.log(results)
-            response.status(200).json(results.rows);
-        }
-    });
+
+    if (apikey == apisecret || hasSession(request, response)) {
+        client.query("INSERT INTO NewStreckat (uid, streck, item) VALUES ($1,$2,$3)", [id, amount, item], (error, results) => {
+            if (error) {
+                response.status(500).send(errorMsg("Internal server error"));
+            } else {
+                response.status(200).json(results.rows);
+            }
+        });
+    } else {
+        return;
+    } 
 };
 
 const pay = async (request, response) => {
@@ -253,7 +271,6 @@ const pay = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results)
         }
     });
 
@@ -261,7 +278,6 @@ const pay = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results)
             response.status(200).json(results.rows);
         }
     });
@@ -281,7 +297,6 @@ const remove = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results)
         }
     });
 
@@ -289,7 +304,6 @@ const remove = async (request, response) => {
         if (error) {
             response.status(500).send(errorMsg("Internal server error"));
         } else {
-            console.log(results);
         }
     });
 
@@ -298,7 +312,6 @@ const remove = async (request, response) => {
             if (error) {
                 response.status(500).send(errorMsg("Internal server error"));
             } else {
-                console.log(results)
             }
         });
     }
