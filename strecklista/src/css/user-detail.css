@@ -1,3 +1,9 @@
+.Toastify__toast-container {    
+    width: 300px !important;
+    margin: auto !important;
+    padding-bottom: 25px !important;
+} 
+
 :root {
     --dg: #1f2833;
     --g: #c5c6c7;

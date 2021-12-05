@@ -28,7 +28,7 @@ useEffect(() => {
     return (
         <div className="liststreck">
             {items.map(i => (
-                i.id===99 ? "" : <StreckItem user={props.id} id={i.id} name={i.name} pris={i.pris} key={i.id} logParent={props.logParent}/>
+                i.id===99 ? "" : <StreckItem user={props.id} id={i.id} name={i.name} pris={i.pris} key={i.id} logParent={props.logParent} alertPurchase={props.alertPurchase}/>
             ))}
         </div>
     )

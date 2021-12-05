@@ -57,6 +57,7 @@ const StreckItemComponent = (props) => {
         await fetch("/api/strecka/"+props.user +"/"+props.id+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
         });
         props.logParent();
+        props.alertPurchase();
     }
 
     const handleClickOpen = () => {
@@ -88,10 +89,10 @@ const StreckItemComponent = (props) => {
                 <input type="text" className="inputfield" readOnly={true} value={amount}/>
                 <Button style={{height: '32px', borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} onClick={() => setAmount(amount+1)} variant="outlined" className="addition">+</Button>
             </div>
-            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} onClick={() => streckInsert()} variant="outlined" className="buttonBuy2">{props.pris * amount} kr</Button>
+            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'black', color: 'black'}} onClick={() => streckInsert()} variant="outlined" className="buttonBuy2">{props.pris * amount} kr</Button>
         </Stack>
         </DialogContent>
-      </Dialog>
+        </Dialog>
         </Paper>
     </ThemeProvider>
     )

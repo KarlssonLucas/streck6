@@ -21,6 +21,8 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import HistoryIcon from '@mui/icons-material/History';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import Divider from '@mui/material/Divider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = createTheme({
   palette: {
@@ -58,6 +60,11 @@ const UserDetailComponent = (props) => {
     const [view, setView] = useState('streck');
     const userId = /[^/]*$/.exec(location.pathname)[0];
 
+    const options = {
+        theme: 'dark', 
+        // ...other options
+    }
+
     const fetchSkuld = async () => {
         const requestOptions = {
             method: 'GET',
@@ -90,6 +97,19 @@ const UserDetailComponent = (props) => {
 
     const logParent = () => {
       fetchSkuld();
+    }
+
+    const alertPurchase = () => {
+        toast.success('🦄 Köp genomfört!', {
+position: "bottom-right",
+theme: 'dark',
+autoClose: 2000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: false,
+draggable: true,
+progress: undefined,
+});
     }
     
     const history = useHistory();
@@ -169,7 +189,7 @@ const UserDetailComponent = (props) => {
                   <ListItem button key='Dragg'>
                   <ListItemIcon><FormatListNumberedIcon/>
                   </ListItemIcon>
-                  <ListItemText primary='Drägglista' />
+                  <ListItemText primary='Strecklista' />
                 </ListItem>
               </List>
               </div>
@@ -200,10 +220,21 @@ const UserDetailComponent = (props) => {
         {view === 'you' && <PersonalInfo id={userId}/>}
         <div className={view === 'you' ? '' : 'div7'}>
                 {view === 'historik' && <HistoryComponent id={userId} logParent={logParent}/>}
-                {view === 'streck' && <StreckComponent id={userId} logParent={logParent}/>}  
+                {view === 'streck' && <StreckComponent id={userId} logParent={logParent} alertPurchase={alertPurchase}/>}  
                 {view === 'skuld' && <PayComponent id={userId} logParent={logParent}/>}
                 {view === 'dragg' && <DraggComponent id={userId}/>}  
             </div>
+        <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover={false}
+        />
         </div>
     )
 }
