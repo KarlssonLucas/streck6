@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles';
 
-// Materials UI Styling
 const styles = makeStyles({
     stack: {
         minWidth: "100%",
@@ -39,7 +38,6 @@ const styles = makeStyles({
   }
 });
 
-// Materials UI Styling
 const theme = createTheme({
   palette: {
     primary: {
@@ -71,7 +69,6 @@ const PersonalInfoComponent = (props) => {
     });
     const classes = styles();
 
-    // Gets the password from the same loginhook as the loginpage, updates in backend
     const updatePassword = async () => {
         const requestOptions = {
             method: 'POST',
@@ -91,7 +88,6 @@ const PersonalInfoComponent = (props) => {
           })
     }
 
-    // Fetches the user connected to the login
     const getUser = async () => {
         const requestOptions = {
             method: 'GET',
@@ -103,7 +99,6 @@ const PersonalInfoComponent = (props) => {
          });
     }
 
-    // Enables enter to update password
     const updateCheck = (e) => {
         if (e.key === 'Enter') {
             updatePassword();

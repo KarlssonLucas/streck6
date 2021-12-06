@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 const StreckComponent = (props) => {
     const [items, setItems] = useState([]);
     
-    // Fetches the items a user can streck
 const fetchItems = async () => {
     const requestOptions = {
         method: 'GET',

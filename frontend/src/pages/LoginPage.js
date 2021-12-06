@@ -8,7 +8,6 @@ import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles'
 
-// Materials UI Styling
 const styles = makeStyles({
   root: {
     color: "#45a29e"
@@ -27,7 +26,6 @@ const styles = makeStyles({
   }
 });
 
-// Materials UI Styling
 const theme = createTheme({
   palette: {
     primary: {
@@ -39,7 +37,6 @@ const theme = createTheme({
   },
 });
 
-// Login hook, updates with the textfields and submits on enter or login button
 const useLoginHook = (formValues) => {
   const [values, handleChange] = useState(formValues);
 
@@ -51,7 +48,6 @@ const useLoginHook = (formValues) => {
   }];
 };
 
-// Function-based component
 const LoginPage = (props) => {
   
   const [errorLogin, setErrorLogin] = useState(false);
@@ -65,10 +61,8 @@ const LoginPage = (props) => {
     password: null
   });
 
-  // For redirecting and page loading
   const history = useHistory();
 
-  // If the state is updated fetch information, doesn't depend on a specific state
   useEffect(() => {
     if (props.logout === true) {
       fetch("/api/logout").then(response => response.json()).then(response => {
@@ -84,7 +78,6 @@ const LoginPage = (props) => {
       });
     }
 
-    // Once you're done "unload" the states
     return () => {
       setLoggedIn();
       setWrongCredentials();
@@ -93,7 +86,6 @@ const LoginPage = (props) => {
     }
   }, [])
 
-  // Function for loggin in, gets information from loginhook
   const login = async () => {
 
     const requestOptions = {
@@ -113,12 +105,12 @@ const LoginPage = (props) => {
       else {
         setWrongCredentials(true);
         setErrorLogin(true);
+        console.log("hejhej");
       }
     })
     window.location.reload();
   };
 
-  // You can now press enter to login
   const loginForm = (e) => {
     if (e.key === 'Enter') {
       login()
