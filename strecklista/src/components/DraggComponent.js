@@ -35,8 +35,8 @@ useEffect(() => {
                     <p className="topl"> {topl}. </p> 
                     <div className="draggInd"> 
                         {i.login} <br /> 
-                        Streckat: {i.sum - 0} enheter <br /> 
-                        Deg: {i.pay} 
+                        Streckat: {i.sum - 0} <br /> 
+                        Balance: {i.pay} 
                     </div> 
                     <hr className="linebreak"></hr>
                 </div>

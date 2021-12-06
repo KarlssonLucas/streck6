@@ -6,8 +6,40 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { makeStyles } from '@material-ui/core/styles'
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#32CD32',
+      },
+      secondary: {
+        main: '#66fcf1',
+      },
+    },
+  });
+
+  const styles = makeStyles({
+    root: {
+      color: "#32CD32"
+    },
+    input: {
+      color: '#66fcf1'
+    },
+    customOutline: {
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#45a29e",
+      },
+      '&:hover:not($disabled):before': {
+        borderColor: '#45a29e',
+      },
+  
+    }
+  });
 
 const StreckItemComponent = (props) => {
+    const classes = styles();
     const [items, setItems] = useState([]);
     const [amount, setAmount] = useState(1);
     const [open, setOpen] = useState(false);
@@ -23,6 +55,7 @@ const StreckItemComponent = (props) => {
         await fetch("/api/strecka/"+props.user +"/"+props.id+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
         });
         props.logParent();
+        props.alertPurchase();
     }
 
     // Open and close the detailview for the item
@@ -35,10 +68,11 @@ const StreckItemComponent = (props) => {
     };
    
     return (
+        <ThemeProvider theme={theme}>
         <Paper className="item" elevation={6}>
             <div> {props.name} </div> 
             <div> {props.pris} kr</div> 
-            <Button className="buttonBuy" variant="outlined" onClick={handleClickOpen}>Köp</Button>
+            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className={'buttonBuy'} variant="outlined" onClick={handleClickOpen}>Köp</Button>
         <Dialog
         open={open}
         onClose={handleClose}
@@ -50,15 +84,16 @@ const StreckItemComponent = (props) => {
         <DialogContent>
             <Stack>
             <div> 
-                <Button onClick={() => amount<2 ? true : setAmount(amount-1)} variant="outlined" className="subtract">-</Button>
+                <Button style={{height: '32px', borderRadius: '3px', border: '1px solid', borderColor: 'red', color: 'red'}} onClick={() => amount<2 ? true : setAmount(amount-1)} variant="outlined" className="subtract">-</Button>
                 <input type="text" className="inputfield" readOnly={true} value={amount}/>
-                <Button onClick={() => setAmount(amount+1)} variant="outlined" className="addition">+</Button>
+                <Button style={{height: '32px', borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} onClick={() => setAmount(amount+1)} variant="outlined" className="addition">+</Button>
             </div>
-            <Button onClick={() => streckInsert()} variant="outlined" className="buttonBuy2">{props.pris * amount} kr</Button>
+            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'black', color: 'black'}} onClick={() => streckInsert()} variant="outlined" className="buttonBuy2">{props.pris * amount} kr</Button>
         </Stack>
         </DialogContent>
-      </Dialog>
+        </Dialog>
         </Paper>
+    </ThemeProvider>
     )
 }
 export default StreckItemComponent;

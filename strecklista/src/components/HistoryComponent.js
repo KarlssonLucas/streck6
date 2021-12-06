@@ -21,7 +21,7 @@ const theme = createTheme({
         main: '#ff0000',
       },
       secondary: {
-        main: '#45a29e',
+        main: '#ff0000',
       },
     },
   });
@@ -73,7 +73,7 @@ const HistoryComponent = (props) => {
                             <div> {i.time.substring(0,10)} </div>
                             <hr className="lineBreakHistory"></hr>
                             <ThemeProvider theme={theme}>
-                                <Button variant="outlined" onClick={() => removeFromHistory(i.id, i.streck, i.itemid)}startIcon={<DeleteIcon />}>Delete</Button>
+                                <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'red', color: 'red'}} variant="outlined" onClick={() => removeFromHistory(i.id, i.streck, i.itemid)}startIcon={<DeleteIcon />}>Delete</Button>
                             </ThemeProvider>
                         </div>
                     </Stack>
