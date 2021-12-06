@@ -24,6 +24,7 @@ import Divider from '@mui/material/Divider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Materials UI Styling
 const theme = createTheme({
   palette: {
     primary: {
@@ -35,6 +36,7 @@ const theme = createTheme({
   },
 });
 
+// Materials UI Styling
 const styles = makeStyles({
   root: {
     color: "#45a29e",
@@ -59,11 +61,6 @@ const UserDetailComponent = (props) => {
     const [user, setUser] = useState([]);
     const [view, setView] = useState('streck');
     const userId = /[^/]*$/.exec(location.pathname)[0];
-
-    const options = {
-        theme: 'dark', 
-        // ...other options
-    }
 
     const fetchSkuld = async () => {
         const requestOptions = {
@@ -95,33 +92,38 @@ const UserDetailComponent = (props) => {
         }
     }, []);
 
+    // function that runs from child component
     const logParent = () => {
       fetchSkuld();
     }
 
     const alertPurchase = () => {
         toast.success('🦄 Köp genomfört!', {
-position: "bottom-right",
-theme: 'dark',
-autoClose: 2000,
-hideProgressBar: false,
-closeOnClick: true,
-pauseOnHover: false,
-draggable: true,
-progress: undefined,
-});
+          position: "bottom-right",
+          theme: 'dark',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
     }
     
+    // For redirection
     const history = useHistory();
 
+    // Logout the user and destroy the cookie
     const logout = async () => {
       await fetch("/api/logout").then((response : any) => response.json()).then((response) => { 
       });   
         window.location.reload()
     }
 
+    // For getting the current users debt
     const skuldPay = skuld.map((s) => s.pay);
 
+    // Page drawer, basically the menu in the topleft corner
     const drawerClick = (v) => {
         setView(v);
         setIsDrawer(false);

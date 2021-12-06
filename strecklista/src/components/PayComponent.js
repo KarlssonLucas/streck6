@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
+// Materials UI Styling
 const styles = (theme) => ({
     stack: {
         minWidth: "100%",
@@ -30,6 +30,7 @@ const styles = (theme) => ({
     }
 });
 
+// Materials UI Styling
 const theme = createTheme({
     palette: {
       primary: {
@@ -45,6 +46,7 @@ const PayComponent = (props) => {
     const classes = styles();
     const [skuld, setSkuld] = useState(0);
 
+    // Fetches the debt collected by the logged in user
     const fetchSkuld = async () => {
         const requestOptions = {
             method: 'GET',
@@ -57,6 +59,7 @@ const PayComponent = (props) => {
  
     }
 
+    // Adds a payment, done in the frontend and calls the backend
     const payDebt = async () => {
         const requestOptions = {
             method: 'GET',
