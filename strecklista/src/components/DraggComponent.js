@@ -38,7 +38,7 @@ useEffect(() => {
                         Streckat: {i.sum - 0} <br /> 
                         Balance: {i.pay} 
                     </div> 
-                    <hr className="linebreak"></hr>
+                { (i !== draggs[draggs.length -1]) ? <hr className="linebreak"></hr> : ""}
                 </div>
             ))}
         </div>
