@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { Divider } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+// MaterialsUI Styling
 const styles = makeStyles({
     paper: {
         backgroundColor: 'red'
@@ -29,6 +30,7 @@ const HistoryComponent = (props) => {
     const [hist, setHist] = useState([]);
     const classes = styles();
 
+    // Get a users streck history
     const getHistory = async () => {
         const requestOptions = {
             method: 'GET',
@@ -40,6 +42,7 @@ const HistoryComponent = (props) => {
         });
     }
 
+    // Remove a specific streck from the history, updates parent to reload the debt in the top right corner, also gets the new history for seamless update
     const removeFromHistory = async (hid, amount, itemid) => {
         const requestOptions = {
             method: 'GET',

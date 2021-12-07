@@ -3,6 +3,8 @@ import "../css/dragg.css";
 import { useHistory } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 
+// Component for displaying the stats of a users streck and how 
+// much money the user owns the bank.
 const DraggComponent = (props) => {
     const [draggs, setDraggs] = useState([]);
     var topl = 0;

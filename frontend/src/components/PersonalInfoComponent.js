@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles';
 
+// Styling for MaterialsUI components
 const styles = makeStyles({
     stack: {
         minWidth: "100%",
@@ -38,6 +39,7 @@ const styles = makeStyles({
   }
 });
 
+// Similar to the part above
 const theme = createTheme({
   palette: {
     primary: {
@@ -49,6 +51,7 @@ const theme = createTheme({
   },
 });
 
+// Login hook for credentials entered by the user, copied from the login page
 const useLoginHook = (formValues) => {
     const [values, handleChange] = useState(formValues);
   
@@ -69,11 +72,12 @@ const PersonalInfoComponent = (props) => {
     });
     const classes = styles();
 
+    // Function for tried to update the password with the login hook credentials
     const updatePassword = async () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials)
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(credentials)
         };
 
         await fetch("/api/updatepassword/"+user.map((u) => {return u.id}), requestOptions).then(response => response.json()).then(response => {
@@ -81,13 +85,13 @@ const PersonalInfoComponent = (props) => {
             if (response === true) {
                 window.location.reload();
                 alert('Ditt lösenord är uppdaterat')
-          }
-            else {
+            } else {
                 alert('Fel lösenord')
-              }
+            }
           })
-    }
+      }
 
+    // Get the specific user logged in
     const getUser = async () => {
         const requestOptions = {
             method: 'GET',
@@ -99,6 +103,7 @@ const PersonalInfoComponent = (props) => {
          });
     }
 
+    // Enter to update password, QOL
     const updateCheck = (e) => {
         if (e.key === 'Enter') {
             updatePassword();

@@ -6,24 +6,26 @@ import { useHistory } from 'react-router-dom';
 const StreckComponent = (props) => {
     const [items, setItems] = useState([]);
     
-const fetchItems = async () => {
-    const requestOptions = {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-    };
+    // Fetch the items that are sold
+    const fetchItems = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        };
 
-    await fetch("/api/items/", requestOptions).then((response : any) => response.json()).then((response) => {
+        await fetch("/api/items/", requestOptions).then((response : any) => response.json()).then((response) => {
             setItems(response);
-    });
-}
-
-useEffect(() => {
-    fetchItems();
-
-    return () => {
-        setItems();
+        });
     }
-}, []);
+
+    // When component is loaded
+    useEffect(() => {
+        fetchItems();
+
+        return () => {
+            setItems();
+        }
+    }, []);
 
     return (
         <div className="liststreck">

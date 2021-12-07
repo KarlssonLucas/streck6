@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from '@material-ui/core/styles'
 
+// MaterialsUI Styling
 const styles = makeStyles({
   root: {
     color: "#45a29e"
@@ -37,6 +38,7 @@ const theme = createTheme({
   },
 });
 
+// Login hook for the credentials given by the user, updates with every keystroke
 const useLoginHook = (formValues) => {
   const [values, handleChange] = useState(formValues);
 
@@ -63,6 +65,7 @@ const LoginPage = (props) => {
 
   const history = useHistory();
 
+  //Checks if the user is logging out and if not gets session
   useEffect(() => {
     if (props.logout === true) {
       fetch("/api/logout").then(response => response.json()).then(response => {
@@ -86,6 +89,8 @@ const LoginPage = (props) => {
     }
   }, [])
 
+
+  // Function for handling a request by the user to login, fetches the correct data and sends it with as a https body
   const login = async () => {
 
     const requestOptions = {
@@ -105,7 +110,6 @@ const LoginPage = (props) => {
       else {
         setWrongCredentials(true);
         setErrorLogin(true);
-        console.log("hejhej");
       }
     })
     window.location.reload();
