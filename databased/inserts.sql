@@ -8,5 +8,5 @@ INSERT INTO Roles VALUES(1, 'admin');
 INSERT INTO Roles VALUES(2, 'other');
 
 -- Keep the password, it is ' ' when logging in and let the users change it themselves
--- DEFAULT ROLE NAME PASSWORD
+-- DEFAULT ROLE NAME PASSWORD (keep the password that i've used with my name)
 INSERT INTO Users VALUES(DEFAULT, 1, 'kakan', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
