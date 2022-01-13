@@ -73,7 +73,7 @@ const StreckItemComponent = (props) => {
         <Paper className="item" elevation={6}>
             <div> {props.name} </div> 
             <div> {props.pris} kr</div> 
-            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className={'buttonBuy'} variant="outlined" onClick={handleClickOpen}>Köp</Button>
+            <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen', padding: '5px'}} className={'buttonBuy'} variant="outlined" onClick={handleClickOpen}>Köp</Button>
         <Dialog
         open={open}
         onClose={handleClose}
