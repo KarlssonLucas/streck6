@@ -21,6 +21,28 @@ webpage we personally use is hosted at heroku with the psql addon.
 * Structure the API and structure the frontend.
 * Safer way of storing sessions
 
+## Installation
+
+If you want to host this webapp yourself you can follow the steps below:
+
+- Fork master of this repo
+- Change the databased/inserts.sql to fit your specific committe (names, roles, inventory etc)
+- Create an account on heroku
+- Create a new webapp with the heroku postgres addon, connect it to YOUR forked repo 
+- Go to webapp -> settings -> reveal config vars: Here you have to add the config variables:
+	- API_KEY (Generate a key online) 
+	- COOKIE_SECRET (Generate online)
+	- DATABASE_URL (Copy the database URI from the heroku postgres addon that you've added)
+- Lastly download postgres and do the following in the terminal:
+	- *in streck6 folder*
+	- cd databased
+	- psql [YOUR POSTGRES URI FROM BEFORE]
+	- \i run.sql
+	- CTRL + D
+	- Done
+
+After this just deploy the repo and you're good to go
+
 Heres how it looks :)
 
 ---
