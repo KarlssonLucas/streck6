@@ -108,7 +108,7 @@ const AdminComponent = (props) => {
 
     const updateCheck = (e) => {
         if (e.key === 'Enter') {
-//            updatePassword();
+            updateUser();
         }
     }
 
@@ -134,10 +134,10 @@ const AdminComponent = (props) => {
         <div className="adminMain">
             <div>
                 <Stack direction="row">
-                    <input type="text" id="newuser" placeholder="------------------>" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
-                    <input type="text" id="newpass" placeholder="VÄLJ ANVÄNDARE" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
+                    <input name="newuser" type="text" id="newuser" placeholder="------------------>" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
+                    <input name="newpass" type="text" id="newpass" placeholder="VÄLJ ANVÄNDARE" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
                 </Stack>
-                <button>UPDATE</button>
+                <button onClick={() => updateUser()}>UPDATE</button>
             </div>
             {users.map(u => (
                 <div id={u.id} key={u.id} className="adminContent" onClick={() => selected(u.id)}>
