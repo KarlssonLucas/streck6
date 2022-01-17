@@ -115,9 +115,6 @@ const login = (request, response) => {
     const newpass = request.body.newpass;
     const id = parseInt(request.params.id);
 
-    console.log(newuser);
-    console.log(newpass);
-
     client.query(
         "SELECT * FROM Users WHERE id=$1", [id], 
          (error, results) => {

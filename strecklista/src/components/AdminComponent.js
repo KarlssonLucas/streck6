@@ -73,7 +73,7 @@ const AdminComponent = (props) => {
         newuser: "",
         newpass: ""
     });
-    const [clickedUser, setClickedUser] = useState(1);
+    const [clickedUser, setClickedUser] = useState(-1);
     const classes = styles(); 
 
     const updateUser = async () => {
@@ -127,17 +127,20 @@ const AdminComponent = (props) => {
     }
     
     const clear = () => {
-        document.getElementById(clickedUser).style.backgroundColor = '';
+        if (clickedUser !== -1) {
+            document.getElementById(clickedUser).style.backgroundColor = '';
+        }
     }
 
     return (
         <div className="adminMain">
-            <div>
-                <Stack direction="row">
-                    <input name="newuser" type="text" id="newuser" placeholder="------------------>" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
-                    <input name="newpass" type="text" id="newpass" placeholder="VÄLJ ANVÄNDARE" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
+            <div className="adminHeader">
+                <Stack direction="row" className={classes.stack}>
+                    <input name="newuser" type="text" id="newuser" placeholder="Nytt avnändarnamn" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
+                    <input name="newpass" type="text" id="newpass" placeholder="Nytt lösenord" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
                 </Stack>
-                <button onClick={() => updateUser()}>UPDATE</button>
+                <button className="adminButton" onClick={() => updateUser()}>UPDATE</button>
+                <p> Välj användare att redigera nedanför, den som highlightas i rött är den du ändrar på </p>
             </div>
             {users.map(u => (
                 <div id={u.id} key={u.id} className="adminContent" onClick={() => selected(u.id)}>

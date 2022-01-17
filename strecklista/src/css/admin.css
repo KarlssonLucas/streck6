@@ -2,6 +2,16 @@
     
 }
 
+.adminHeader {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.adminButton {
+    width: 85%;
+    height: 30px;
+}
+
 .adminContent {
     margin-top: 10px;
     width: 90%;
