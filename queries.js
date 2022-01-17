@@ -108,6 +108,26 @@ const login = (request, response) => {
         )
   }
 
+  const updateUser = (request, response) => {
+    if (!hasSession(request, response)) return;
+
+    const newuser = request.body.newuser;
+    const newpass = request.body.newpass;
+    const id = parseInt(request.params.id);
+
+    client.query(
+        "SELECT * FROM Users WHERE id=$1", [id], 
+         (error, results) => {
+             if (error) {
+              response.status(500).send(false);
+             }
+
+            updatePass(newpass, id);
+            updateUsername(newuser, id);
+            response.status(200).send(true);
+    });
+  } 
+
   const updatePass = (newpass, id) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(newpass, salt, (err, hash) => {
@@ -120,6 +140,15 @@ const login = (request, response) => {
         });
     });
   }
+
+  const updateUsername = (newuser, id) => {
+    client.query(
+        "UPDATE users SET login=$1 WHERE id=$2", [newuser, id], 
+            (error, results) => {
+            console.log("USERNAME UPDATED")
+            } 
+    )
+  }    
   
   const getSession = (request, response) => {
     const session = {

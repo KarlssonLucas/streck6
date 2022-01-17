@@ -17,6 +17,7 @@ app.use(session({
 
 app.post('/api/login', db.login)
 app.post('/api/updatepassword/:id', db.updatepassword)
+app.post('/api/updateuser/:id', db.updateUser)
 app.get('/api/updateInventory/:id/:amount', db.updateInventory)
 app.get('/api/inventory', db.getInventory)
 app.get('/api/session', db.getSession)

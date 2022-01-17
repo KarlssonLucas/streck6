@@ -6,6 +6,7 @@ import HistoryComponent from "./HistoryComponent";
 import PayComponent from "./PayComponent";
 import PersonalInfo from "./PersonalInfoComponent";
 import DraggComponent from "./DraggComponent";
+import AdminComponent from "./AdminComponent";
 import { Drawer, IconButton } 
     from '@material-ui/core';
 import { List, ListItem, ListItemIcon, ListItemText } 
@@ -20,6 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import HistoryIcon from '@mui/icons-material/History';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import Divider from '@mui/material/Divider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -122,6 +124,8 @@ progress: undefined,
 
     const skuldPay = skuld.map((s) => s.pay);
 
+    const userRole = user.map((u) => u.roleid);
+
     const drawerClick = (v) => {
         setView(v);
         setIsDrawer(false);
@@ -204,6 +208,18 @@ progress: undefined,
               </List>
               </div>
               <Divider/>
+              {userRole[0] === 1 ?
+              <div onClick = {() => drawerClick('admin')}>
+              <List>
+                  <ListItem button key=''>
+                  <ListItemIcon><AdminPanelSettingsIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary='Admin' />
+                </ListItem>
+              </List>
+              </div>
+              : '' }
+
             <div className="testest" onClick={() => logout()}>
               <List>
                   <ListItem button key='Logga ut'>
@@ -223,6 +239,7 @@ progress: undefined,
                 {view === 'streck' && <StreckComponent id={userId} logParent={logParent} alertPurchase={alertPurchase}/>}  
                 {view === 'skuld' && <PayComponent id={userId} logParent={logParent}/>}
                 {view === 'dragg' && <DraggComponent id={userId}/>}  
+                {view === 'admin' && <AdminComponent id={userId}/>}
             </div>
         <ToastContainer
             position="bottom-right"
