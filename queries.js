@@ -128,6 +128,27 @@ const login = (request, response) => {
     });
   } 
 
+  const createUser = (request, response) => {
+    if (!hasSession(request, response)) return;
+
+    const createuser = request.body.createuser;
+    const createpass = request.body.createpass;
+
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(createpass, salt, (err, hash) => {
+            client.query(
+                "INSERT INTO Users VALUES (DEFAULT, 2, $1, $2)", [createuser, hash], 
+                 (error, results) => {
+                     if (error) {
+                      response.status(500).send(false);
+                     }
+                    response.status(200).send(true);
+            });
+        });
+    });
+
+  } 
+
   const updatePass = (newpass, id) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(newpass, salt, (err, hash) => {
@@ -366,5 +387,6 @@ module.exports = {
     updatepassword,
     updateInventory,
     getInventory,
-    updateUser
+    updateUser,
+    createUser
 }

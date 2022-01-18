@@ -2,7 +2,7 @@
     
 }
 
-.adminHeader {
+.adminHeader, .adminFooter {
     text-align: center;
     margin-top: 5%;
 }

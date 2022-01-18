@@ -71,7 +71,9 @@ const AdminComponent = (props) => {
     const [users, setUsers] = useState([]);
     const [credentials, setCredentials] = useLoginHook({
         newuser: "",
-        newpass: ""
+        newpass: "",
+        createuser: "",
+        createpass: ""
     });
     const [clickedUser, setClickedUser] = useState(-1);
     const classes = styles(); 
@@ -95,6 +97,25 @@ const AdminComponent = (props) => {
           })
     }
 
+    const createUser = async () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credentials)
+        };
+
+        await fetch("/api/createuser", requestOptions).then(response => response.json()).then(response => {
+            console.log(response)
+            if (response === true) {
+                window.location.reload();
+                alert('Användare skapad')
+          }
+            else {
+                alert('Öhh oogabooga någonting gick fel, försök igen eller säg till kakan')
+              }
+          })
+    }
+
     const getUsers = async () => {
         const requestOptions = {
             method: 'GET',
@@ -104,12 +125,6 @@ const AdminComponent = (props) => {
         await fetch("/api/users", requestOptions).then((response : any) => response.json()).then((response) => {
             setUsers(response);
          });
-    }
-
-    const updateCheck = (e) => {
-        if (e.key === 'Enter') {
-            updateUser();
-        }
     }
 
     useEffect(() => {
@@ -136,8 +151,8 @@ const AdminComponent = (props) => {
         <div className="adminMain">
             <div className="adminHeader">
                 <Stack direction="row" className={classes.stack}>
-                    <input name="newuser" type="text" id="newuser" placeholder="Nytt avnändarnamn" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
-                    <input name="newpass" type="text" id="newpass" placeholder="Nytt lösenord" onChange={setCredentials} onKeyDown={(e) => updateCheck(e)}></input>
+                    <input name="newuser" type="text" id="newuser" placeholder="Nytt avnändarnamn" onChange={setCredentials}></input>
+                    <input name="newpass" type="text" id="newpass" placeholder="Nytt lösenord" onChange={setCredentials}></input>
                 </Stack>
                 <button className="adminButton" onClick={() => updateUser()}>UPDATE</button>
                 <p> Välj användare att redigera nedanför, den som highlightas i rött är den du ändrar på </p>
@@ -147,6 +162,15 @@ const AdminComponent = (props) => {
                     <p>{u.login}</p>
                 </div>
             ))}
+
+            <div className="adminFooter">
+                <Stack direction="row" className={classes.stack}>
+                    <input name="createuser" type="text" id="createuser" placeholder="Avnändarnamn" onChange={setCredentials}></input>
+                    <input name="createpass" type="text" id="createpass" placeholder="Lösenord" onChange={setCredentials}></input>
+                </Stack>
+                <button className="adminButton" onClick={() => createUser()}>SKAPA ANVÄNDARE</button>
+            </div>
+
         </div>
     )
 }
