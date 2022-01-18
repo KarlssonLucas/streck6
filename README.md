@@ -1,4 +1,4 @@
-# streck6
+# streck6 [![KarlssonLucas](https://circleci.com/gh/KarlssonLucas/streck6.svg?style=shield)](https://github.com/KarlssonLucas/streck6)
 Digital management for committee inventory.
 
 ## Features
