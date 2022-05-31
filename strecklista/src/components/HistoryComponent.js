@@ -1,6 +1,7 @@
 import "../css/historycomponent.css";
 import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Stack from '@mui/material/Stack';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,6 +28,8 @@ const theme = createTheme({
 
 const HistoryComponent = (props) => {
     const [hist, setHist] = useState([]);
+    const [id, setId] = useState(props.id);
+    const [users, setUsers] = useState([]);
     const classes = styles();
 
     const getHistory = async () => {
@@ -35,9 +38,20 @@ const HistoryComponent = (props) => {
             headers: {'Content-Type': 'application/json'},
         };
 
-        await fetch("/api/history/"+props.id, requestOptions).then((response : any) => response.json()).then((response) => {
+        await fetch("/api/history/"+id, requestOptions).then((response : any) => response.json()).then((response) => {
             setHist(response);
         });
+    }
+
+    const getUsers = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json'}
+        };
+
+        await fetch("/api/users", requestOptions).then((response : any) => response.json()).then((response) => {
+            setUsers(response);
+         });
     }
 
     const removeFromHistory = async (hid, amount, itemid) => {
@@ -46,7 +60,7 @@ const HistoryComponent = (props) => {
             headers: {'Content-Type': 'application/json'},
         };
 
-        await fetch("/api/remove/"+props.id+"/"+hid+"/"+itemid+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
+        await fetch("/api/remove/"+id+"/"+hid+"/"+itemid+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
             props.logParent();
             getHistory();
         });
@@ -54,11 +68,29 @@ const HistoryComponent = (props) => {
 
     useEffect(() => {
         props.logParent();
+        getUsers();
         getHistory();
-    }, []);
+        console.log(props.role)
+        console.log(users);
+    }, [id]);
+
+    const onSelectUser = (id) => {
+        setId(id);
+    }
     
     return (
         <div>
+
+        {props.role == 1 ?
+        <div className="idcompparent">
+        {users.map(u => (
+            <div key={u.id} className="idcomp" onClick={() => onSelectUser(u.id)}> 
+                {u.login}
+            </div>
+        ))}
+        </div>
+        : '' }
+
         {hist.slice(0).reverse().map(i => (
             <div key={i.id} className="">
                 <Paper elevation={6} className="muipaper">

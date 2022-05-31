@@ -235,7 +235,7 @@ progress: undefined,
         </div>
         {view === 'you' && <PersonalInfo id={userId}/>}
         <div className={view === 'you' ? '' : 'div7'}>
-                {view === 'historik' && <HistoryComponent id={userId} logParent={logParent}/>}
+                {view === 'historik' && <HistoryComponent id={userId} logParent={logParent} role={userRole[0]}/>}
                 {view === 'streck' && <StreckComponent id={userId} logParent={logParent} alertPurchase={alertPurchase}/>}  
                 {view === 'skuld' && <PayComponent id={userId} logParent={logParent}/>}
                 {view === 'dragg' && <DraggComponent id={userId}/>}  
