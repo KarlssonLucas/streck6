@@ -1,6 +1,6 @@
 CREATE OR REPLACE VIEW streckat AS 
-SELECT Users.id AS uid, streck, item
-FROM Users LEFT JOIN Strecklist ON Users.id = sid;
+SELECT Users.id AS uid, streck, item, units
+FROM Users LEFT JOIN Strecklist ON Users.id = sid LEFT JOIN Items ON Items.id = item;
 
 CREATE OR REPLACE VIEW NewStreckat AS
 SELECT Users.id AS uid, streck, item
@@ -26,12 +26,7 @@ SELECT uid, pay+paid as pay
 FROM owed LEFT JOIN betaltById ON sid=uid;
 
 CREATE OR REPLACE VIEW totstreck AS
-    WITH vodka AS(
-        SELECT Streckat.uid AS vid, (SUM(COALESCE(streck, 0)) * 0.5) AS sumv 
-        FROM streckat where item=2 group by Streckat.uid),
-    other AS(
-        SELECT Streckat.uid AS oid, SUM(COALESCE(streck, 0)) AS sumo
-        FROM streckat where item!=2 GROUP BY Streckat.uid)
-    SELECT id,login, COALESCE(sumv,0) + COALESCE(sumo,0) as sum from USERS left join vodka ON vid=id LEFT JOIN other ON oid = id;
-
-
+    WITH other AS(
+        SELECT Streckat.uid AS oid, SUM(COALESCE(streck * units, 0)) AS sumo
+        FROM streckat GROUP BY Streckat.uid)
+    SELECT id,login, COALESCE(sumo,0) as sum from USERS LEFT JOIN other ON oid = id;

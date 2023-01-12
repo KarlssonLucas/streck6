@@ -71,7 +71,6 @@ const PayComponent = (props) => {
 
     useEffect(() => {
         fetchSkuld();
-        console.log("5a9".match(/^[0-9]+$/) != null)
     }, []);
    
     return (
@@ -79,7 +78,7 @@ const PayComponent = (props) => {
             <ThemeProvider theme={theme}>
             <Stack spacing={2}>
                 <input id="inputPay" key={skuld ? 'notLoadedYet' : 'loaded'} type="number" className="if" defaultValue={skuld<0 ? skuld*-1 : 0} />
-                <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="payButton" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value.match(/^[0-9]+$/) != null ? payDebt() : alert('hur full är du egentligen')}> Lägg till betalning </Button>
+                <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="payButton" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value.match(/^-?\d+$/) != null ? payDebt() : alert('hur full är du egentligen')}> Lägg till betalning </Button>
                 <div className="addToPay"> 
                     <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 50} > +50 </Button>
                     <Button style={{borderRadius: '3px', border: '1px solid', borderColor: 'limegreen', color: 'limegreen'}} className="buttonAddToPay" color="primary" variant="outlined" onClick={() => document.getElementById("inputPay").value = parseInt(document.getElementById("inputPay").value) + 100}>  +100 </Button>

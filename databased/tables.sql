@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS Skuld CASCADE;
 CREATE TABLE Items (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
+    units NUMERIC NOT NULL,
     pris INT NOT NULL
 );
 

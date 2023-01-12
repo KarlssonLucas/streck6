@@ -18,7 +18,8 @@ const styles = makeStyles({
         minWidth: "100%",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        bottom: "100px"
     },
 
     root: {
@@ -75,6 +76,11 @@ const AdminComponent = (props) => {
         createuser: "",
         createpass: ""
     });
+    const [item, setItem] = useLoginHook({
+        createName: "",
+        createPris: "",
+        createUnits: ""
+    });
     const [clickedUser, setClickedUser] = useState(-1);
     const classes = styles(); 
 
@@ -109,6 +115,27 @@ const AdminComponent = (props) => {
             if (response === true) {
                 window.location.reload();
                 alert('Användare skapad')
+          }
+            else {
+                alert('Öhh oogabooga någonting gick fel, försök igen eller säg till kakan')
+              }
+          })
+    }
+
+    const createItem = async () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(item)
+        };
+
+        console.log("hej")
+
+        await fetch("/api/createitem", requestOptions).then(response => response.json()).then(response => {
+            console.log(response)
+            if (response === true) {
+                window.location.reload();
+                alert('Nytt item är tillagt')
           }
             else {
                 alert('Öhh oogabooga någonting gick fel, försök igen eller säg till kakan')
@@ -169,6 +196,19 @@ const AdminComponent = (props) => {
                     <input name="createpass" type="text" id="createpass" placeholder="Lösenord" onChange={setCredentials}></input>
                 </Stack>
                 <button className="adminButton" onClick={() => createUser()}>SKAPA ANVÄNDARE</button>
+            </div>
+
+            <div className="adminFooter">
+                <Stack direction="column" className={classes.stack}>
+                    <Stack direction="row" className={classes.stack}>
+                        <input name="createPris" type="number" id="createPris" placeholder="Pris" onChange={setItem}></input>
+                        <input name="createUnits" type="number" id="createUnits" placeholder="Antal standardenheter" onChange={setItem}></input>
+                    </Stack>
+                    <Stack direction="row" className={classes.stack}>
+                        <input name="createName" type="text" id="createName" placeholder="Namn" onChange={setItem}></input>
+                    </Stack>
+                </Stack>
+                <button className="adminButton" onClick={() => createItem()}>LÄGG TILL ITEM</button>
             </div>
 
         </div>

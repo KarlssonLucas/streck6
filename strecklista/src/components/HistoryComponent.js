@@ -60,6 +60,8 @@ const HistoryComponent = (props) => {
             headers: {'Content-Type': 'application/json'},
         };
 
+        console.log("itemid", itemid)
+
         await fetch("/api/remove/"+id+"/"+hid+"/"+itemid+"/"+amount, requestOptions).then((response : any) => response.json()).then((response) => {
             props.logParent();
             getHistory();

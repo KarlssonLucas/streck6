@@ -368,6 +368,21 @@ const remove = async (request, response) => {
     response.status(200).json({});
 };
 
+const createItem = async (request, response) => {
+    if (!hasSession(request, response)) return;
+    const name = request.body.createName;
+    const units = parseInt(request.body.createUnits);
+    const pris = parseInt(request.body.createPris);
+
+    await client.query("INSERT INTO ITEMS (id, name, units, pris) VALUES (DEFAULT,$1,$2,$3)", [name, units, pris], (error, results) => {
+        if (error) {
+            response.status(500).send(errorMsg("Internal server error"));
+        } else {
+        }
+    });
+    response.status(200).json(true);
+}
+
 module.exports = {
     users,
     usersById,
@@ -388,5 +403,6 @@ module.exports = {
     updateInventory,
     getInventory,
     updateUser,
-    createUser
+    createUser,
+    createItem
 }
