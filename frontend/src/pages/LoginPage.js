@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import "../css/loginpage.css";

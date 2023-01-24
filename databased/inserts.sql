@@ -15,11 +15,5 @@ INSERT INTO Roles VALUES(3, 'exIT');
 
 -- Keep the password, it is ' ' when logging in and let the users change it themselves
 -- DEFAULT ROLE NAME PASSWORD (keep the password that i've used with my name)
-INSERT INTO Users VALUES(DEFAULT, 1, 'krizzly', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'gubbe', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'haren', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'muu', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'zorro', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'fabbo', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'jonte', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
-INSERT INTO Users VALUES(DEFAULT, 2, 'ping', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
+INSERT INTO Users VALUES(DEFAULT, 1, 'admin', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');
+INSERT INTO Users VALUES(DEFAULT, 2, 'user', '$2b$10$bjbPS.NkaQc80DISDJ9guuyHIdaiYBRkSW2nrfA.2wGLfx7fcfQvK');

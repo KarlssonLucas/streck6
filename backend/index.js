@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./strecklista/build/index.html"));
+  res.status(200).send("API")
 });
 
 app.listen(port, () => {

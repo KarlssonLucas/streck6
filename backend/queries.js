@@ -16,14 +16,12 @@ const login = (request, response) => {
     const id = request.body.login.toString().toLowerCase();
     const password = request.body.password;
 
-    console.log(id);
-
     client.query(
       "SELECT * FROM users where login=$1",
       [id],
       (error, result) => {
         if (error) {
-          response.status(500).send(errorMsg("Internal server error"));
+          response.status(500).send(errorMsg(error));
         } else if (result.rows.length != 1) {
             request.session.destroy();
             response.status(400).send(errorMsg("Wrong credentials"));
@@ -182,9 +180,10 @@ const login = (request, response) => {
 
 const users = (request, response) => {
     if (!hasSession(request, response)) return;
+    console.log("hej")
     client.query("SELECT * FROM Users", (error, results) => {
         if (error) {
-            response.status(500).send(errorMsg("Internal server error"));
+            response.status(500).send(error);
         } else {
             response.status(200).json(results.rows);
         }
